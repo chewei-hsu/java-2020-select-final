@@ -13,6 +13,7 @@ public class home {
     private JButton btnSearch;
     private JPanel btnHolder;
     private String searchTemp = "";
+    private String searchCourse;
     public static String metalUI = "javax.swing.plaf.metal.MetalLookAndFeel";
 
     public home() {
@@ -20,7 +21,9 @@ public class home {
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                System.out.println("Search for");
+                System.out.println(searchField.getText());
+                searchCourse=searchField.getText();
             }
         });
         btnLucky.addActionListener(new ActionListener() {
