@@ -6,7 +6,6 @@ public class CourseData {
     ArrayList<Integer> time;
 
     public CourseData(){
-        course_name = "Default";
     }
 
     public CourseData(String random_num, String course_code, String course_name, int credit, int duration, int isMust, String teacher, int method, ArrayList<Integer> time, String location, int student_bound, String ps) {

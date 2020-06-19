@@ -22,9 +22,12 @@ public class home {
     private JPanel resultHolder;
     private JPanel notFoundPanel;
     private JLabel title;
+    private JPanel searchHolder;
+    private JComboBox semesterSelect;
     private String searchTemp = "";
     private String searchCourse = null;
     private CardLayout layout;
+    private JListCustomRenderer resultList = new JListCustomRenderer();;
     public static String metalUI = "javax.swing.plaf.metal.MetalLookAndFeel";
     public static CourseData detailData = new CourseData();
     public home(String search){
@@ -32,7 +35,7 @@ public class home {
         searchCourse = search;
     }
     public home() {
-        searchResult = new JListCustomRenderer().createPanel(DB.getCourse(searchCourse,"108-1"));
+        searchResult = resultList.createPanel(DB.getCourse(null,"108-2"));
         selected.setBorder(new LineBorder(Color.GRAY, 3));
         resultHolder.add(searchResult,"r");
         resultHolder.add(notFoundPanel,"n");
@@ -40,7 +43,7 @@ public class home {
         layout.show(resultHolder,"r");
         MouseMotionListener clickListener = new MouseAdapter() {
             public void mouseMoved(MouseEvent me) {
-                detailData = JListCustomRenderer.getTarget();
+                //detailData = resultList.getTarget();
                 if(detailData != null){
                     title.setText(detailData.getCourse_name());
                 }
@@ -48,11 +51,10 @@ public class home {
             }
         };
         frame.addMouseMotionListener(clickListener);
-        resultHolder.addMouseMotionListener(clickListener);
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(searchField.getText().equals("輸入課程關鍵字 或 直接按搜尋鈕")){
+                if(searchField.getText().equals("輸入關鍵字 或 直接搜尋")){
                     searchCourse = null;
                 }
                 else{
@@ -65,7 +67,8 @@ public class home {
                 }
                 else{
                     resultHolder.remove(searchResult);
-                    searchResult = new JListCustomRenderer().createPanel(CD);
+                    searchResult = null;
+                    searchResult = resultList.createPanel(DB.getCourse(searchCourse,"108-1"));
                     resultHolder.add(searchResult,"r");
                     layout = (CardLayout)resultHolder.getLayout();
                     layout.show(resultHolder,"r");
@@ -92,7 +95,7 @@ public class home {
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
                 if (searchField.getText().equals("")) {
-                    searchField.setText("輸入課程關鍵字 或 直接按搜尋鈕");
+                    searchField.setText("輸入關鍵字 或 直接搜尋");
                     searchTemp = "";
                     searchField.setForeground(new Color(175, 175, 175));
                 } else {
