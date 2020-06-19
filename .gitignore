@@ -1,3 +1,7 @@
 
 .idea/workspace.xml
-.idea/workspace.xml
+.idea
+out
+src
+courseApp/out
+courseApp/.idea
