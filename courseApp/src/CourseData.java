@@ -70,8 +70,4 @@ public class CourseData {
     public int getStudent_bound() {
         return student_bound;
     }
-
-    public String toString(){
-        return course_name;
-    }
 }
