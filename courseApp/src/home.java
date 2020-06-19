@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class home {
     private JPanel searchBarAndBtn;
@@ -7,9 +9,18 @@ public class home {
     private JPanel selected;
     private JPanel panel1;
     private JTextArea textArea1;
-    private JButton button1;
-    private JButton button2;
+    private JButton btnLucky;
+    private JButton btnSearch;
     public static String metalUI = "javax.swing.plaf.metal.MetalLookAndFeel";
+
+    public home() {
+        btnSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                
+            }
+        });
+    }
 
     public static void main(String[] args) {
         Debugger.setDebugMode(true);
@@ -35,5 +46,6 @@ public class home {
     private void createUIComponents() {
         searchResult = new JListCustomRenderer().createPanel(DB.getCourse(null,"108-1"));
     }
+
 }
 
