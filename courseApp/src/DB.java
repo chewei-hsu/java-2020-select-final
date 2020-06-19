@@ -71,9 +71,9 @@ public class DB {
     }
 
     private static void extractData(ResultSet rs) throws SQLException {
-        Debugger.showDebugMessage("EXTRACTED! ");
         courseDataList.clear();
         while (rs.next()){
+            Debugger.showDebugMessage("EXTRACTED! ");
             ArrayList<Integer> dummy = new ArrayList<Integer>();
             dummy.add(1);
             dummy.add(2);

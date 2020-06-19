@@ -1,5 +1,4 @@
 import java.awt.*;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -28,11 +27,11 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
     }
     @Override
     public Component getListCellRendererComponent(JList<? extends CourseData> list, CourseData courseData, int index, boolean isSelected, boolean cellHasFocus) {
-
-
+        Debugger.showDebugMessage("getListCellRComp");
         lbTitle.setFont(new Font(Font.DIALOG,Font.BOLD,20));
         lbTitle.setText(courseData.getCourse_name());
-        lbTime2.setText("  課程編號:  "+ courseData.getCourse_code());
+        lbTime2.setText("  課程編號: "+ courseData.getCourse_code());
+        Debugger.showDebugMessage("  課程編號: "+ courseData.getCourse_code());
         lbTime2.setForeground(Color.GRAY);
         lbTime2.setFont(new Font(Font.DIALOG,Font.BOLD,15));
         lbTeacher.setForeground(Color.red);

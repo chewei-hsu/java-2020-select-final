@@ -13,14 +13,11 @@ public class JListCustomRenderer extends JFrame{
     }
     public JPanel createPanel(ArrayList<CourseData> CD){
         if(CD != null){
+            Debugger.showDebugMessage("CD loaded!");
             displayData = CD;
         }
         JPanel frame = new JPanel(new BorderLayout());
-        JPanel cardHolder = new JPanel(new CardLayout());
         JPanel panel = new JPanel(new BorderLayout());
-        cardHolder.add(panel,"List");
-        CardLayout cl = (CardLayout)(cardHolder.getLayout());
-        cl.show(cardHolder, "List");
         JList jlist = createList();
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -45,7 +42,7 @@ public class JListCustomRenderer extends JFrame{
         panel.setBorder(new EmptyBorder(5,5,5,5));
         panel.setBackground(new Color(21,188,163));
         panel.add(new JScrollPane(jlist),BorderLayout.CENTER);
-        frame.add(cardHolder);
+        frame.add(panel);
         return frame;
     }
     public JList<CourseData> createList(){
@@ -54,6 +51,7 @@ public class JListCustomRenderer extends JFrame{
             model.addElement(val);
         JList<CourseData> list = new JList<CourseData>(model);
         list.setCellRenderer(new CourseRenderer());
+        Debugger.showDebugMessage("LIST created.");
         return list;
     }
 }
