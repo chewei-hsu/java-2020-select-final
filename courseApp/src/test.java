@@ -5,6 +5,7 @@ public class test {
     private JPanel test1;
 
     public static void main(String[] args) {
+        System.out.println(Processor.timeWordToInt("一4,5,6 二2,A"));
         Debugger.setDebugMode(true);
         try {
             UIManager.setLookAndFeel(home.metalUI); // 使用Metal UI 模式啟動
