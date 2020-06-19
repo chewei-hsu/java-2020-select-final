@@ -3,15 +3,19 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class home {
     private JPanel searchBarAndBtn;
     private JPanel searchResult;
     private JPanel selected;
     private JPanel panel1;
-    private JTextArea textArea1;
+    private JTextArea searchField;
     private JButton btnLucky;
     private JButton btnSearch;
+    private JPanel btnHolder;
+    private String searchTemp = "";
     public static String metalUI = "javax.swing.plaf.metal.MetalLookAndFeel";
 
     public home() {
@@ -22,6 +26,34 @@ public class home {
 
             }
         });
+        btnLucky.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+            }
+        });
+            searchField.addFocusListener(new FocusAdapter() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    super.focusGained(e);
+                    searchField.setText(searchTemp);
+                    searchField.setForeground(new Color(8, 37, 42));
+                }
+            });
+
+            searchField.addFocusListener(new FocusAdapter() {
+                @Override
+                public void focusLost(FocusEvent e) {
+                    super.focusLost(e);
+                    if (searchField.getText().equals("")) {
+                        searchField.setText("輸入課程關鍵字");
+                        searchTemp = "";
+                        searchField.setForeground(new Color(175, 175, 175));
+                    } else {
+                        searchTemp = searchField.getText();
+                    }
+                }
+            });
     }
 
     public static void main(String[] args) {

@@ -12,6 +12,9 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
     private Color CYAN = new Color(21, 188, 163);
     private Color LIGHT_CYAN = new Color(179, 241, 236);
     private Color LIGHT_GRAY = new Color(237, 237, 237);
+    private Color COLOR_PRIMARY = new Color(0, 45, 98);
+    private Color COLOR_SECONDARY = new Color(82, 117, 129, 155);
+    private Color COLOR_TIME = new Color(203, 127, 35);
     public CourseRenderer(){
         setBackground(Color.GRAY);
         setLayout(new BorderLayout(0,0));
@@ -27,7 +30,7 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
         panelRight.add(lbTime1);
         panelRight.add(lbTime2);
         panelRight.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-        LineBorder border = new LineBorder(Color.RED, 3);
+        LineBorder border = new LineBorder(COLOR_TIME, 3);
         rightHolder.setBorder(border);
         rightHolder.add(panelRight);
         holder.add(rightHolder, BorderLayout.EAST);
@@ -40,8 +43,9 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
         lbTitle.setFont(new Font(Font.DIALOG,Font.BOLD,18));
         lbTitle.setText(courseData.getCourse_name());
         lbTitle.setOpaque(true);
+        lbTitle.setForeground(Color.DARK_GRAY);
 
-        lbTeacher.setForeground(Color.BLUE);
+        lbTeacher.setForeground(COLOR_PRIMARY);
         lbTeacher.setFont(new Font(Font.DIALOG, Font.PLAIN, 16));
         lbTeacher.setText(courseData.getTeacher());
         lbTeacher.setHorizontalAlignment(JTextField.LEFT);
@@ -51,17 +55,17 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
         lbCourseCode.setText(courseData.getCourse_code());
         lbCourseCode.setOpaque(true);
         lbCourseCode.setFont(new Font(Font.DIALOG,Font.ITALIC,12));
-        lbCourseCode.setForeground(Color.GRAY);
+        lbCourseCode.setForeground(COLOR_SECONDARY);
 
         lbTime1.setOpaque(true);
-        lbTime1.setForeground(Color.RED);
+        lbTime1.setForeground(COLOR_TIME);
         lbTime1.setFont(new Font(Font.DIALOG,Font.BOLD,16));
         lbTime1.setText("時間一");
         lbTime1.setHorizontalAlignment(JTextField.RIGHT);
         lbTime1.setVerticalAlignment(JTextField.TOP);
 
         lbTime2.setText(courseData.getCourse_code());
-        lbTime2.setForeground(Color.RED);
+        lbTime2.setForeground(COLOR_TIME);
         lbTime2.setFont(new Font(Font.DIALOG,Font.BOLD,16));
         lbTime1.setHorizontalAlignment(JTextField.RIGHT);
         lbTime1.setVerticalAlignment(JTextField.TOP);
