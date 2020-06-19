@@ -13,7 +13,6 @@ import javax.swing.border.EmptyBorder;
 
 public class CourseRenderer<CourseData> extends JPanel implements ListCellRenderer<CourseData> {
     private JLabel lbTitle = new JLabel();
-    private JLabel lbIcon = new JLabel();
     private JLabel lbProductKey = new JLabel();
     private JLabel lbPrice = new JLabel();
     private JLabel lbAmount = new JLabel();
@@ -41,11 +40,6 @@ public class CourseRenderer<CourseData> extends JPanel implements ListCellRender
     public Component getListCellRendererComponent(JList<? extends CourseData> list, CourseData courseData, int index, boolean isSelected, boolean cellHasFocus) {
 
 
-        //String imgFilepath=System.getProperty("user.dir")+ "/img/trip/"+courseData.getCode()+"-1x.png";
-        URL url = this.getClass().getResource(
-                "/img/trip/"+courseData.getCode()+"-1x.png");
-        ImageIcon icon = new ImageIcon(url);
-        lbIcon.setIcon(icon);
         lbIcon.setVerticalAlignment(JTextField.TOP);
         lbTitle.setFont(new Font(Font.DIALOG,Font.BOLD,20));
         lbTitle.setText(textCutter(courseData.getTitle(),620,lbTitle.getFontMetrics(lbTitle.getFont())));
