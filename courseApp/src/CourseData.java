@@ -1,12 +1,15 @@
+import java.util.ArrayList;
+
 public class CourseData {
-    String random_num, course_code,course_name,teacher,time,ps,location;
+    String random_num, course_code,course_name,teacher,ps,location;
     int credit,duration,isMust,method,student_bound;
+    ArrayList<Integer> time;
 
     public CourseData(){
 
     }
 
-    public CourseData(String random_num, String course_code, String course_name, int credit, int duration, int isMust, String teacher, int method, String time, String location, int student_bound, String ps) {
+    public CourseData(String random_num, String course_code, String course_name, int credit, int duration, int isMust, String teacher, int method, ArrayList<Integer> time, String location, int student_bound, String ps) {
         this.random_num = random_num;
         this.course_code = course_code;
         this.course_name = course_name;
@@ -37,8 +40,11 @@ public class CourseData {
         return teacher;
     }
 
-    public String getTime_location() {
-        return time_location;
+    public ArrayList<Integer> getTime() {
+        return time;
+    }
+    public String getLocation(){
+        return location;
     }
 
     public String getPs() {

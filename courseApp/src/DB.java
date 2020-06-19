@@ -49,14 +49,15 @@ public class DB {
         return flag;
     }
 
-    public static getCourse(String searchWord,String semester){
+    public static ArrayList<CourseData> getCourse(String searchWord,String semester){
         connectToDB();
         String sql = "SELECT * FROM " + semester;
+        Statement stmt = null;
         if(searchWord != null){
             sql += "WHERE course_name LIKE " + searchWord;
         }
         try{
-            Statement stmt = connection.createStatement();
+            stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             extractData(rs);
         }catch (SQLException e){
@@ -69,10 +70,14 @@ public class DB {
         return courseDataList;
     }
 
-    private static void extractData(ResultSet rs){
+    private static void extractData(ResultSet rs) throws SQLException {
         courseDataList.clear();
         while (rs.next()){
-            CourseData cdTemp = new CourseData(rs.getString("rand_num"),rs.getString("course_code"),rs.getString("course_name"),rs.getInt("credit"),rs.getInt("duration"),rs.getInt("isMust"),rs.getString("teacher"),rs.getInt("method"),rs.getString("time"),rs.getString("location"),rs.getInt("student_bound"),rs.getString("ps"));
+            ArrayList<Integer> dummy = new ArrayList<Integer>();
+            dummy.add(1);
+            dummy.add(2);
+            CourseData cdTemp = new CourseData(rs.getString("rand_num"),rs.getString("course_code"),rs.getString("course_name"),rs.getInt("credit"),rs.getInt("duration"),rs.getInt("isMust"),rs.getString("teacher"),rs.getInt("method"),dummy,rs.getString("location"),rs.getInt("student_bound"),rs.getString("ps"));
+            //CourseData cdTemp = new CourseData(rs.getString("rand_num"),rs.getString("course_code"),rs.getString("course_name"),rs.getInt("credit"),rs.getInt("duration"),rs.getInt("isMust"),rs.getString("teacher"),rs.getInt("method"),rs.getString("time"),rs.getString("location"),rs.getInt("student_bound"),rs.getString("ps"));
         }
     }
 
