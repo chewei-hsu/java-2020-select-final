@@ -61,14 +61,14 @@ public class home {
                     searchCourse=searchField.getText();
                 }
                 System.out.println("Search for:" + searchCourse);
-                ArrayList<CourseData> CD = DB.getCourse(searchCourse,"108-1");
+                ArrayList<CourseData> CD = DB.getCourse(searchCourse,semesterSelect.getSelectedItem().toString());
                 if(CD.size() == 0){
                     layout.show(resultHolder,"n");
                 }
                 else{
                     resultHolder.remove(searchResult);
                     searchResult = null;
-                    searchResult = resultList.createPanel(DB.getCourse(searchCourse,"108-1"));
+                    searchResult = resultList.createPanel(CD);
                     resultHolder.add(searchResult,"r");
                     layout = (CardLayout)resultHolder.getLayout();
                     layout.show(resultHolder,"r");
