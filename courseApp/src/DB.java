@@ -51,7 +51,7 @@ public class DB {
 
     public static ArrayList<CourseData> getCourse(String searchWord,String semester){
         connectToDB();
-        String sql = "SELECT * FROM " + semester;
+        String sql = "SELECT * FROM \'" + semester+"\'";
         Statement stmt = null;
         if(searchWord != null){
             sql += "WHERE course_name LIKE " + searchWord;
@@ -71,6 +71,7 @@ public class DB {
     }
 
     private static void extractData(ResultSet rs) throws SQLException {
+        Debugger.showDebugMessage("EXTRACTED! ");
         courseDataList.clear();
         while (rs.next()){
             ArrayList<Integer> dummy = new ArrayList<Integer>();

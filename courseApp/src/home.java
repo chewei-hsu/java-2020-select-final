@@ -12,6 +12,7 @@ public class home {
     public static String metalUI = "javax.swing.plaf.metal.MetalLookAndFeel";
 
     public static void main(String[] args) {
+        Debugger.setDebugMode(true);
         try {
             UIManager.setLookAndFeel(home.metalUI); // 使用Metal UI 模式啟動
             UIManager.setLookAndFeel(metalUI); // 使用Metal UI 模式啟動
