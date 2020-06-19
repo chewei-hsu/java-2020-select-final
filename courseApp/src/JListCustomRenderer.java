@@ -1,3 +1,5 @@
+import src.CourseRenderer;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ public class JListCustomRenderer extends JFrame{
                         Debugger.showDebugMessage("Double-clicked on: " + o);
                         CourseData target = new CourseData();
                         for(int i=0; i<displayData.size(); i++){
-                            if(displayData.get(i).getTitle().equals(o.toString())){
+                            if(displayData.get(i).getCourse_name().equals(o.toString())){
                                 target = displayData.get(i);
                                 break;
                             }
@@ -52,7 +54,7 @@ public class JListCustomRenderer extends JFrame{
         for(CourseData val : displayData)
             model.addElement(val);
         JList<CourseData> list = new JList<CourseData>(model);
-        list.setCellRenderer(new ProductRenderer());
+        list.setCellRenderer(new CourseRenderer<CourseData>());
         return list;
     }
 }

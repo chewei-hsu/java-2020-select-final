@@ -1,19 +1,11 @@
-package src;
 import java.awt.*;
-import java.awt.Font.*;
-import java.awt.image.BufferedImage;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URL;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-public class CourseRenderer<CourseData> extends JPanel implements ListCellRenderer<CourseData> {
+public class CourseRenderer extends JPanel implements ListCellRenderer<CourseData> {
     private JLabel lbTitle = new JLabel();
-    private JLabel lbProductKey = new JLabel();
+    private JLabel lbCourseName = new JLabel();
     private JLabel lbPrice = new JLabel();
     private JLabel lbAmount = new JLabel();
     private JLabel lbCat = new JLabel();
@@ -29,26 +21,21 @@ public class CourseRenderer<CourseData> extends JPanel implements ListCellRender
         JPanel panelRight = new JPanel(new GridLayout(0,1));
         panelLeft.add(lbTitle);
         panelLeft.add(lbCat);
-        panelLeft.add(lbProductKey);
+        panelLeft.add(lbCourseName);
         panelRight.add(lbPrice);
         panelRight.add(lbAmount);
         add(panelRight, BorderLayout.EAST);
         add(panelLeft, BorderLayout.CENTER);
-        add(lbIcon, BorderLayout.WEST);
     }
     @Override
     public Component getListCellRendererComponent(JList<? extends CourseData> list, CourseData courseData, int index, boolean isSelected, boolean cellHasFocus) {
 
 
-        lbIcon.setVerticalAlignment(JTextField.TOP);
         lbTitle.setFont(new Font(Font.DIALOG,Font.BOLD,20));
-        lbTitle.setText(textCutter(courseData.getTitle(),620,lbTitle.getFontMetrics(lbTitle.getFont())));
-        lbCat.setText("  分類:  "+ sEngine.reverseSearch(courseData.getCode()));
+        lbTitle.setText(courseData.getCourse_name());
+        lbCat.setText("  課程編號:  "+ courseData.getCourse_code());
         lbCat.setForeground(Color.GRAY);
         lbCat.setFont(new Font(Font.DIALOG,Font.BOLD,15));
-        lbProductKey.setForeground(Color.GRAY);
-        lbProductKey.setFont(new Font(Font.DIALOG,Font.ITALIC,12));
-        lbProductKey.setText("  "+courseData.getKey());
         lbPrice.setForeground(Color.red);
         lbPrice.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
         lbPrice.setText("$"+courseData.getCheapestPrice()+" 起 ");
@@ -62,14 +49,14 @@ public class CourseRenderer<CourseData> extends JPanel implements ListCellRender
         lbTitle.setOpaque(true);
         lbCat.setOpaque(true);
         lbIcon.setOpaque(true);
-        lbProductKey.setOpaque(true);
+        lbCourseName.setOpaque(true);
         lbAmount.setOpaque(true);
         lbPrice.setOpaque(true);
 
         // when select item
         if (isSelected) {
             lbTitle.setBackground(list.getSelectionBackground());
-            lbProductKey.setBackground(list.getSelectionBackground());
+            lbCourseName.setBackground(list.getSelectionBackground());
             lbCat.setBackground(list.getSelectionBackground());
             lbIcon.setBackground(list.getSelectionBackground());
             lbAmount.setBackground(list.getSelectionBackground());
@@ -77,7 +64,7 @@ public class CourseRenderer<CourseData> extends JPanel implements ListCellRender
             setBackground(list.getSelectionBackground());
         } else { // when don't select
             lbTitle.setBackground(LIGHT_GRAY);
-            lbProductKey.setBackground(LIGHT_GRAY);
+            lbCourseName.setBackground(LIGHT_GRAY);
             lbCat.setBackground(LIGHT_GRAY);
             lbIcon.setBackground(LIGHT_GRAY);
             lbAmount.setBackground(LIGHT_GRAY);
