@@ -1,5 +1,8 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class home {
     private JPanel searchBarAndBtn;
@@ -7,9 +10,19 @@ public class home {
     private JPanel selected;
     private JPanel panel1;
     private JTextArea textArea1;
-    private JButton button1;
-    private JButton button2;
+    private JButton btnLucky;
+    private JButton btnSearch;
     public static String metalUI = "javax.swing.plaf.metal.MetalLookAndFeel";
+
+    public home() {
+        selected.setBorder(new LineBorder(Color.GRAY, 3));
+        btnSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+            }
+        });
+    }
 
     public static void main(String[] args) {
         Debugger.setDebugMode(true);
