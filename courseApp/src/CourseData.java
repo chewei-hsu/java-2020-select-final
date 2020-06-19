@@ -1,17 +1,18 @@
 public class CourseData {
-    String random_num, course_code,course_name,teacher,time_location,ps;
+    String random_num, course_code,course_name,teacher,time,ps,location;
     int credit,duration,isMust,method,student_bound;
 
     public CourseData(){
 
     }
 
-    public CourseData(String random_num, String course_code, String course_name, int credit, int duration, int isMust, String teacher, int method, String time_location, int student_bound, String ps) {
+    public CourseData(String random_num, String course_code, String course_name, int credit, int duration, int isMust, String teacher, int method, String time, String location, int student_bound, String ps) {
         this.random_num = random_num;
         this.course_code = course_code;
         this.course_name = course_name;
         this.teacher = teacher;
-        this.time_location = time_location;
+        this.time = time;
+        this.location = location;
         this.ps = ps;
         this.credit = credit;
         this.duration = duration;
