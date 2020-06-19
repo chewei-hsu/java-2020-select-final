@@ -4,6 +4,7 @@
     <content url="file://$MODULE_DIR$/courseApp">
       <sourceFolder url="file://$MODULE_DIR$/courseApp/src" isTestSource="false" />
     </content>
+    <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
