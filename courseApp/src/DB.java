@@ -54,7 +54,7 @@ public class DB {
         String sql = "SELECT * FROM \'" + semester+"\'";
         Statement stmt = null;
         if(searchWord != null){
-            sql += "WHERE course_name LIKE " + searchWord;
+            sql += "WHERE course_name LIKE \'%" + searchWord+"%\'";
         }
         try{
             stmt = connection.createStatement();
@@ -73,7 +73,6 @@ public class DB {
     private static void extractData(ResultSet rs) throws SQLException {
         courseDataList.clear();
         while (rs.next()){
-            Debugger.showDebugMessage("EXTRACTED! ");
             ArrayList<Integer> dummy = new ArrayList<Integer>();
             dummy.add(1);
             dummy.add(2);

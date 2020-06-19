@@ -39,7 +39,6 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
     }
     @Override
     public Component getListCellRendererComponent(JList<? extends CourseData> list, CourseData courseData, int index, boolean isSelected, boolean cellHasFocus) {
-        Debugger.showDebugMessage("getListCellRComp");
         lbTitle.setFont(new Font(Font.DIALOG,Font.BOLD,18));
         lbTitle.setText(courseData.getCourse_name());
         lbTitle.setOpaque(true);
