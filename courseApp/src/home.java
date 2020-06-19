@@ -22,4 +22,10 @@ public class home {
 
     private static void windowSizeLimiter(JFrame frame, int i, int i1) {
     }
+
+public class home {
+    private JPanel panel1;
+    private JTextArea textArea1;
+    private JButton button1;
+    private JButton button2;
 }
