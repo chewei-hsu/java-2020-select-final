@@ -11,9 +11,9 @@ public class JListCustomRenderer extends JFrame{
     public JListCustomRenderer(){
 
     }
-    public JPanel createPanel(ArrayList<CourseData> PD){
-        if(PD != null){
-            displayData = PD;
+    public JPanel createPanel(ArrayList<CourseData> CD){
+        if(CD != null){
+            displayData = CD;
         }
         JPanel frame = new JPanel(new BorderLayout());
         JPanel cardHolder = new JPanel(new CardLayout());
