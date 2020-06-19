@@ -1,10 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.event.*;
 
 public class home {
     private JPanel searchBarAndBtn;
@@ -65,7 +62,7 @@ public class home {
             e.printStackTrace();
         }
         JFrame frame = new JFrame("Course"); // 設定視窗標題
-        windowSizeLimiter(frame, 800, 800);
+        windowSizeLimiter(frame, 1000, 800);
         frame.setContentPane(new home().panel1);
         frame.pack();
         frame.getContentPane().requestFocusInWindow();
@@ -74,7 +71,16 @@ public class home {
         frame.setVisible(true);
     }
 
-    private static void windowSizeLimiter(JFrame frame, int i, int i1) {
+    private static void windowSizeLimiter(JFrame frame, int width, int height) {
+        frame.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent evt) {
+                Dimension size = frame.getSize();
+                if (size.getWidth() < width || size.getHeight() < height) {
+                    JOptionPane.showMessageDialog(null,"過小的視窗大小會影響使用體驗!","視窗大小",JOptionPane.WARNING_MESSAGE);
+                    frame.setSize((int) width+100, (int) height+50);
+                }
+            }
+        });
     }
 
     private void createUIComponents() {
