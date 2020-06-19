@@ -1,4 +1,3 @@
-import src.CourseRenderer;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -54,7 +53,7 @@ public class JListCustomRenderer extends JFrame{
         for(CourseData val : displayData)
             model.addElement(val);
         JList<CourseData> list = new JList<CourseData>(model);
-        list.setCellRenderer(new CourseRenderer<CourseData>());
+        list.setCellRenderer(new CourseRenderer());
         return list;
     }
 }

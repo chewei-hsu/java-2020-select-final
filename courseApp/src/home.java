@@ -6,7 +6,6 @@ public class home {
     private JTextArea textArea1;
     private JButton button1;
     private JButton button2;
-    private JPanel window;
     public static String metalUI = "javax.swing.plaf.metal.MetalLookAndFeel";
 
     public static void main(String[] args) {
@@ -17,7 +16,7 @@ public class home {
         }
         JFrame frame = new JFrame("Course"); // 設定視窗標題
         windowSizeLimiter(frame, 800, 800);
-        frame.setContentPane(new home().window);
+        frame.setContentPane(new home().panel1);
         frame.pack();
         frame.getContentPane().requestFocusInWindow();
         frame.setSize(1000, 800); // 設定初始視窗大小
