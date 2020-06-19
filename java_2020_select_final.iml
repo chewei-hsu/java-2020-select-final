@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/courseApp/out" />
+    <content url="file://$MODULE_DIR$/courseApp">
+      <sourceFolder url="file://$MODULE_DIR$/courseApp/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="commons-io-2.6-javadoc" level="project" />
+  </component>
+</module>
