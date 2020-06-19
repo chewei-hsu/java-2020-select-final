@@ -2,12 +2,12 @@ import java.util.ArrayList;
 
 public class Processor {
     public static ArrayList<Integer> timeWordToInt(String time){
-        ArrayList<int> timeInt = new ArrayList<int>();
+        ArrayList<Integer> timeInt = new ArrayList<Integer>();
         int currentDay, currentIndex = 0;
         while(currentIndex < time.length()){
             currentDay = parseDay(time.charAt(currentIndex));
             currentIndex++;
-            while(1){
+            while(true){
                 if(currentIndex >= time.length()){
                     break;
                 }
@@ -31,6 +31,7 @@ public class Processor {
                 }
             }
         }
+        return timeInt;
     }
 
     private static int parseDay(char ch){
