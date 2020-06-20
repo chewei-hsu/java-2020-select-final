@@ -40,6 +40,7 @@ public class home {
     private JListCustomRenderer resultList = new JListCustomRenderer();;
     public static String metalUI = "javax.swing.plaf.metal.MetalLookAndFeel";
     public static CourseData detailData = new CourseData();
+    public static ArrayList<CourseData> choosedCourse = new ArrayList<>();
     public home(String search){
         super();
         searchCourse = search;
@@ -251,6 +252,14 @@ public class home {
                                     break;
                                 }
                             }
+                            if(choosedCourse.contains(detailData)){
+                                choosedCourse.remove(detailData);
+                            }
+                            else{
+                                choosedCourse.add(detailData);
+                            }
+                            System.out.println(choosedCourse);
+                            Processor.mappingToTableArray(choosedCourse);
                         }
                     }
                 }

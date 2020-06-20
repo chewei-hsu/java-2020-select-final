@@ -78,6 +78,20 @@ public class Processor {
         return parsedTime;
     }
 
+    public static ArrayList<CourseData>[][] mappingToTableArray(ArrayList<CourseData> choosedCourse){
+        ArrayList<CourseData>[][] mappingTable = new ArrayList[5][14];
+        for(CourseData course : choosedCourse){
+            for(Integer i : course.time){
+                if(mappingTable[(i-1)/14][(i-1)%14] == null){
+                    mappingTable[(i-1)/14][(i-1)%14] = new ArrayList<>();
+                }
+                mappingTable[(i-1)/14][(i-1)%14].add(course);
+                System.out.println((i-1)/14+","+(i-1)%14);
+            }
+        }
+        return mappingTable;
+    }
+
     private static int parseDay(char ch){
         switch(ch){
             case '一':
