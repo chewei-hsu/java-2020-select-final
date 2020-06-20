@@ -6,7 +6,6 @@ public class CourseData {
     ArrayList<Integer> time;
 
     public CourseData(){
-
     }
 
     public CourseData(String random_num, String course_code, String course_name, int credit, int duration, int isMust, String teacher, int method, String time, String location, int student_bound, String ps) {
@@ -69,5 +68,9 @@ public class CourseData {
 
     public int getStudent_bound() {
         return student_bound;
+    }
+
+    public String toString(){
+        return course_name;
     }
 }
