@@ -8,27 +8,25 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
     private JLabel lbCourseCode = new JLabel();
     private JLabel lbTeacher = new JLabel();
     private JLabel lbTime1 = new JLabel();
-    private JLabel lbTime2 = new JLabel();
     private Color CYAN = new Color(21, 188, 163);
     private Color LIGHT_CYAN = new Color(179, 241, 236);
     private Color LIGHT_GRAY = new Color(237, 237, 237);
     private Color COLOR_PRIMARY = new Color(0, 45, 98);
     private Color COLOR_SECONDARY = new Color(82, 117, 129, 155);
     private Color COLOR_TIME = new Color(203, 127, 35);
+    private JPanel panelRight = new JPanel(new GridLayout(0,1));
+    private JPanel panelLeft = new JPanel(new GridLayout(0,1));
+    private JPanel rightHolder = new JPanel(new BorderLayout(5,5));
+    private JPanel holder = new JPanel(new BorderLayout());
     public CourseRenderer(){
         setBackground(Color.GRAY);
         setLayout(new BorderLayout(0,0));
         setBorder(new EmptyBorder(0,0,3,0));
-        JPanel panelLeft = new JPanel(new GridLayout(0,1));
-        JPanel panelRight = new JPanel(new GridLayout(0,1));
-        JPanel rightHolder = new JPanel(new BorderLayout(5,5));
-        JPanel holder = new JPanel(new BorderLayout());
         holder.setBorder(new EmptyBorder(5,5,5,5));
         panelLeft.add(lbTitle);
         panelLeft.add(lbTeacher);
         panelLeft.add(lbCourseCode);
         panelRight.add(lbTime1);
-        panelRight.add(lbTime2);
         panelRight.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
         LineBorder border = new LineBorder(COLOR_TIME, 3);
         rightHolder.setBorder(border);
@@ -55,21 +53,27 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
         lbCourseCode.setOpaque(true);
         lbCourseCode.setFont(new Font(Font.DIALOG,Font.ITALIC,12));
         lbCourseCode.setForeground(COLOR_SECONDARY);
-
+        String rawTimeString = Processor.timeIntToString(courseData.getTime());
+        String[] trimmedTime = new String[3];
+        boolean isDoubleTime = false;
+        rawTimeString = rawTimeString.trim();
+        if(rawTimeString.contains(" ")){
+            isDoubleTime = true;
+            trimmedTime = rawTimeString.split(" ");
+            Debugger.showDebugMessage("Time one: "+trimmedTime[0]+" Time two: "+trimmedTime[1]);
+        }
+        else {
+            Debugger.showDebugMessage("Only one: "+rawTimeString);
+            isDoubleTime = false;
+        }
         lbTime1.setOpaque(true);
         lbTime1.setForeground(COLOR_TIME);
         lbTime1.setFont(new Font(Font.DIALOG,Font.BOLD,16));
-        lbTime1.setText("時間一");
-        lbTime1.setHorizontalAlignment(JTextField.RIGHT);
-        lbTime1.setVerticalAlignment(JTextField.TOP);
+        lbTime1.setText(isDoubleTime? ("<html>"+trimmedTime[0]+"<br>"+trimmedTime[1]+"</html>"):rawTimeString);
 
-        lbTime2.setText(courseData.getCourse_code());
-        lbTime2.setForeground(COLOR_TIME);
-        lbTime2.setFont(new Font(Font.DIALOG,Font.BOLD,16));
-        lbTime1.setHorizontalAlignment(JTextField.RIGHT);
-        lbTime1.setVerticalAlignment(JTextField.TOP);
-        lbTime2.setText("時間二");
-        lbTime2.setOpaque(true);
+        lbTime1.setHorizontalAlignment(JTextField.CENTER);
+        lbTime1.setVerticalAlignment(JTextField.CENTER);
+
 
 
 
@@ -78,14 +82,12 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
         if (isSelected) {
             lbTitle.setBackground(list.getSelectionBackground());
             lbCourseCode.setBackground(list.getSelectionBackground());
-            lbTime2.setBackground(list.getSelectionBackground());
             lbTime1.setBackground(list.getSelectionBackground());
             lbTeacher.setBackground(list.getSelectionBackground());
             setBackground(list.getSelectionBackground());
         } else { // when don't select
             lbTitle.setBackground(LIGHT_GRAY);
             lbCourseCode.setBackground(LIGHT_GRAY);
-            lbTime2.setBackground(LIGHT_GRAY);
             lbTime1.setBackground(LIGHT_GRAY);
             lbTeacher.setBackground(LIGHT_GRAY);
             setBackground(Color.GRAY);

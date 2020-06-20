@@ -74,6 +74,7 @@ public class DB {
         courseDataList.clear();
         while (rs.next()){
             CourseData cdTemp = new CourseData(rs.getString("rand_num"),rs.getString("course_code"),rs.getString("course_name"),rs.getInt("credit"),rs.getInt("duration"),rs.getInt("isMust"),rs.getString("teacher"),rs.getInt("method"),rs.getString("time"),rs.getString("location"),rs.getInt("student_bound"),rs.getString("ps"));
+            courseDataList.add(cdTemp);
         }
     }
 
