@@ -32,9 +32,11 @@ public class home {
     private JPanel tableCard;
     private JPanel weekdayHolder;
     private JPanel tableHolder;
+    private JPanel tableDisplay;
     private String searchTemp = "";
     private String searchCourse = null;
     private CardLayout layout;
+    private CardLayout tableLayout;
     private JListCustomRenderer resultList = new JListCustomRenderer();;
     public static String metalUI = "javax.swing.plaf.metal.MetalLookAndFeel";
     public static CourseData detailData = new CourseData();
@@ -46,24 +48,15 @@ public class home {
         initDetailElement();
         selected.setVisible(false);
         searchResult = resultList.createPanel(DB.getCourse(null,"108-2"));
-        tableHolder = new courseTable().getPanel();
+        tableDisplay = new courseTable().getPanel();
         selected.setBorder(new LineBorder(Color.GRAY, 3));
         resultHolder.add(searchResult,"r");
         resultHolder.add(notFoundPanel,"n");
         layout = (CardLayout)resultHolder.getLayout();
+        tableHolder.add(tableDisplay,"t");
+        tableLayout = (CardLayout)tableHolder.getLayout();
         layout.show(resultHolder,"r");
-        /*
-        MouseMotionListener clickListener = new MouseAdapter() {
-            public void mouseMoved(MouseEvent me) {
-                //detailData = resultList.getTarget();
-                if(detailData != null){
-                    title.setText(detailData.getCourse_name());
-                }
-
-            }
-        };
-        frame.addMouseMotionListener(clickListener);
-        */
+        tableLayout.show(tableHolder,"t");
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -144,10 +137,10 @@ public class home {
         frame.setContentPane(new home().panel1);
         frame.pack();
         frame.getContentPane().requestFocusInWindow();
-        frame.setSize(1000, 800); // 設定初始視窗大小
+        frame.setSize(1024, 900); // 設定初始視窗大小
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        windowSizeLimiter(frame, 1000, 800);
+        windowSizeLimiter(frame, 1000, 900);
     }
     public void refreshDetailPanel(){
         if(detailData != null){
@@ -202,8 +195,8 @@ public class home {
             public void componentResized(ComponentEvent evt) {
                 Dimension size = frame.getSize();
                 if (size.getWidth() < width || size.getHeight() < height) {
-                    frame.setSize((int) width + 100, (int) height + 50);
-                    JOptionPane.showMessageDialog(null,"過小的視窗大小會影響使用體驗! \n 建議視窗大小：1024*768","視窗大小警告",JOptionPane.WARNING_MESSAGE);
+                    frame.setSize((int) width + 50, (int) height + 25);
+                    JOptionPane.showMessageDialog(null,"過小的視窗大小會影響使用體驗! \n 建議視窗大小：1024*900 以上","視窗大小警告",JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
