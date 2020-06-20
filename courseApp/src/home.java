@@ -41,6 +41,7 @@ public class home {
     public static String metalUI = "javax.swing.plaf.metal.MetalLookAndFeel";
     public static CourseData detailData = new CourseData();
     public static ArrayList<CourseData> choosedCourse = new ArrayList<>();
+    public static ArrayList<ArrayList<CourseData>> courseStats;
     public home(String search){
         super();
         searchCourse = search;
@@ -142,6 +143,14 @@ public class home {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         windowSizeLimiter(frame, 1000, 900);
+    }
+    public void refreshTable(ArrayList<ArrayList<CourseData>> data){
+        tableHolder.remove(tableDisplay);
+        tableDisplay = null;
+        tableDisplay = new courseTable(data).getPanel();
+        resultHolder.add(tableDisplay,"t");
+        tableLayout = (CardLayout)tableHolder.getLayout();
+        tableLayout.show(tableHolder,"t");
     }
     public void refreshDetailPanel(){
         if(detailData != null){
@@ -259,7 +268,8 @@ public class home {
                                 choosedCourse.add(detailData);
                             }
                             System.out.println(choosedCourse);
-                            Processor.mappingToTableArray(choosedCourse);
+                            courseStats = Processor.mappingToTableArray(choosedCourse);
+                            refreshTable(courseStats);
                         }
                     }
                 }

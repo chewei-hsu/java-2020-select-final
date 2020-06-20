@@ -78,15 +78,15 @@ public class Processor {
         return parsedTime;
     }
 
-    public static ArrayList<CourseData>[][] mappingToTableArray(ArrayList<CourseData> choosedCourse){
-        ArrayList<CourseData>[][] mappingTable = new ArrayList[5][14];
+    public static ArrayList<ArrayList<CourseData>> mappingToTableArray(ArrayList<CourseData> choosedCourse){
+        ArrayList<ArrayList<CourseData>> mappingTable = new ArrayList<ArrayList<CourseData>>();
+        for(int i=0;i<70;i++){
+            mappingTable.add(new ArrayList<CourseData>());
+        }
         for(CourseData course : choosedCourse){
             for(Integer i : course.time){
-                if(mappingTable[(i-1)/14][(i-1)%14] == null){
-                    mappingTable[(i-1)/14][(i-1)%14] = new ArrayList<>();
-                }
-                mappingTable[(i-1)/14][(i-1)%14].add(course);
-                System.out.println((i-1)/14+","+(i-1)%14);
+                Debugger.showDebugMessage("[PROCESSOR] Time: "+i+" Name: "+course.getCourse_name());
+                mappingTable.get(i).add(course);
             }
         }
         return mappingTable;

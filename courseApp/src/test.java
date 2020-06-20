@@ -19,9 +19,13 @@ public class test {
         frame.setSize(1000, 800); // 設定初始視窗大小
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        for(int i = 1 ; i < 6 ; i++){
+            for(int j = 1 ; j < 15 ; j++){
+                System.out.println("holder"+i+"_"+j+" = panelTemp["+((i-1)*14+(j-1))+"];");
+            }
+        }
     }
     private void createUIComponents() {
-    //    test1 = new home.JListCustomRenderer().createPanel(DB.getCourse(null,"108-1"));
-        System.out.println("xxxx");
+        test1 = new courseTable().getPanel();
     }
 }
