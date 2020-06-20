@@ -21,7 +21,7 @@ public class test {
         frame.setVisible(true);
     }
     private void createUIComponents() {
-        test1 = new JListCustomRenderer().createPanel(DB.getCourse(null,"108-1"));
+    //    test1 = new home.JListCustomRenderer().createPanel(DB.getCourse(null,"108-1"));
         System.out.println("xxxx");
     }
 }

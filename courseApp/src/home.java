@@ -1,11 +1,9 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-
-import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
 
 public class home {
     private static JFrame frame = new JFrame("Course"); // 設定視窗標題
@@ -21,9 +19,19 @@ public class home {
     private JPanel btnHolder;
     private JPanel resultHolder;
     private JPanel notFoundPanel;
-    private JLabel title;
+    private JLabel lbName;
     private JPanel searchHolder;
     private JComboBox semesterSelect;
+    private JLabel lbLocation;
+    private JTextPane textPs;
+    private JLabel lbIsMust;
+    private JLabel lbCredit;
+    private JLabel lbWay;
+    private JLabel lbCode;
+    private JLabel lbRandNum;
+    private JPanel tableCard;
+    private JPanel weekdayHolder;
+    private JPanel tableHolder;
     private String searchTemp = "";
     private String searchCourse = null;
     private CardLayout layout;
@@ -35,12 +43,16 @@ public class home {
         searchCourse = search;
     }
     public home() {
+        initDetailElement();
+        selected.setVisible(false);
         searchResult = resultList.createPanel(DB.getCourse(null,"108-2"));
+        tableHolder = new courseTable().getPanel();
         selected.setBorder(new LineBorder(Color.GRAY, 3));
         resultHolder.add(searchResult,"r");
         resultHolder.add(notFoundPanel,"n");
         layout = (CardLayout)resultHolder.getLayout();
         layout.show(resultHolder,"r");
+        /*
         MouseMotionListener clickListener = new MouseAdapter() {
             public void mouseMoved(MouseEvent me) {
                 //detailData = resultList.getTarget();
@@ -51,28 +63,11 @@ public class home {
             }
         };
         frame.addMouseMotionListener(clickListener);
+        */
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(searchField.getText().equals("輸入關鍵字 或 直接搜尋")){
-                    searchCourse = null;
-                }
-                else{
-                    searchCourse=searchField.getText();
-                }
-                System.out.println("Search for:" + searchCourse);
-                ArrayList<CourseData> CD = DB.getCourse(searchCourse,semesterSelect.getSelectedItem().toString());
-                if(CD.size() == 0){
-                    layout.show(resultHolder,"n");
-                }
-                else{
-                    resultHolder.remove(searchResult);
-                    searchResult = null;
-                    searchResult = resultList.createPanel(CD);
-                    resultHolder.add(searchResult,"r");
-                    layout = (CardLayout)resultHolder.getLayout();
-                    layout.show(resultHolder,"r");
-                }
+                search();
             }
         });
         btnLucky.addActionListener(new ActionListener() {
@@ -103,10 +98,39 @@ public class home {
                 }
             }
         });
+        searchField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                int keyCode = e.getKeyCode();
+                if(keyCode == 10){
+                    //Enter button
+                    search();
+                }
+            }
+        });
     }
 
-    public JPanel getPanel(){
-        return panel1;
+    public void search(){
+        if(searchField.getText().equals("輸入關鍵字 或 直接搜尋")){
+            searchCourse = null;
+        }
+        else{
+            searchCourse=searchField.getText();
+        }
+        System.out.println("Search for:" + searchCourse);
+        ArrayList<CourseData> CD = DB.getCourse(searchCourse,semesterSelect.getSelectedItem().toString());
+        if(CD.size() == 0){
+            layout.show(resultHolder,"n");
+        }
+        else{
+            resultHolder.remove(searchResult);
+            searchResult = null;
+            searchResult = resultList.createPanel(CD);
+            resultHolder.add(searchResult,"r");
+            layout = (CardLayout)resultHolder.getLayout();
+            layout.show(resultHolder,"r");
+        }
     }
 
     public static void main(String[] args) {
@@ -125,6 +149,53 @@ public class home {
         frame.setVisible(true);
         windowSizeLimiter(frame, 1000, 800);
     }
+    public void refreshDetailPanel(){
+        if(detailData != null){
+            selected.setVisible(true);
+            lbName.setText(detailData.getCourse_name());
+            lbLocation.setText(detailData.getLocation());
+            lbCredit.setText(detailData.getCredit()+"");
+            lbWay.setText(detailData.getMethod()+"");
+            String convertedIsMust = "";
+            switch (detailData.getIsMust()){
+                case 2:
+                    convertedIsMust = "必帶";
+                    break;
+                case 1:
+                    convertedIsMust = "必修";
+                    break;
+                case 0:
+                    convertedIsMust = "選修";
+                    break;
+                default:
+                    convertedIsMust = "未知";
+                    break;
+            }
+            lbIsMust.setText(convertedIsMust);
+            lbCode.setText(detailData.getCourse_code());
+            lbRandNum.setText(detailData.getRandom_num());
+            if(detailData.getPs() == null){
+                textPs.setText("無內容");
+                textPs.setForeground(Color.GRAY);
+            }
+            else {
+                textPs.setText(detailData.getPs());
+                textPs.setForeground(new Color(0, 45, 98));
+            }
+
+        }
+    }
+   public void initDetailElement(){
+        lbName.setText("");
+        lbLocation.setText("");
+        lbCredit.setText("");
+        lbWay.setText("");
+        lbIsMust.setText("");
+        lbCode.setText("");
+        lbRandNum.setText("");
+        textPs.setText("");
+   }
+
 
     private static void windowSizeLimiter(JFrame frame, int width, int height) {
         frame.addComponentListener(new ComponentAdapter() {
@@ -139,5 +210,76 @@ public class home {
     }
 
     private void createUIComponents() {
+    }
+
+    class JListCustomRenderer extends JFrame {
+        private ArrayList<CourseData> displayData = new ArrayList<CourseData>();
+
+        public JListCustomRenderer() {
+
+        }
+
+        public JPanel createPanel(ArrayList<CourseData> CD) {
+            if (CD != null) {
+                Debugger.showDebugMessage(CD.size() + "");
+                Debugger.showDebugMessage("CD loaded!");
+                displayData = CD;
+                Debugger.showDebugMessage(displayData.size() + "");
+            }
+            JPanel frame = new JPanel(new BorderLayout());
+            JPanel panel = new JPanel(new BorderLayout());
+            JList jlist = createList();
+
+            MouseListener mouseListener = new MouseAdapter() {
+                public void mouseClicked(MouseEvent mouseEvent) {
+                    JList<String> theList = (JList) mouseEvent.getSource();
+                    if (mouseEvent.getClickCount() == 1) {
+                        int index = theList.locationToIndex(mouseEvent.getPoint());
+                        if (index >= 0) {
+                            Object o = theList.getModel().getElementAt(index);
+
+                            for (int i = 0; i < displayData.size(); i++) {
+                                if (displayData.get(i).getCourse_name().equals(o.toString())) {
+                                    detailData = displayData.get(i);
+                                    refreshDetailPanel();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (mouseEvent.getClickCount() == 2) {
+                        int index = theList.locationToIndex(mouseEvent.getPoint());
+                        if (index >= 0) {
+                            Object o = theList.getModel().getElementAt(index);
+                            Debugger.showDebugMessage("Double-clicked on: " + o);
+                            for (int i = 0; i < displayData.size(); i++) {
+                                if (displayData.get(i).getCourse_name().equals(o.toString())) {
+                                    detailData = displayData.get(i);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            jlist.addMouseListener(mouseListener);
+            panel.setBorder(new EmptyBorder(3, 3, 3, 3));
+            panel.setBackground(new Color(80, 80, 80));
+            panel.add(new JScrollPane(jlist), BorderLayout.CENTER);
+            frame.add(panel);
+            return frame;
+        }
+
+        public JList<CourseData> createList() {
+            DefaultListModel<CourseData> model = new DefaultListModel<CourseData>();
+            for (CourseData val : displayData) {
+                Debugger.showDebugMessage("Model ADDED!");
+                model.addElement(val);
+            }
+            JList<CourseData> list = new JList<CourseData>(model);
+            list.setCellRenderer(new CourseRenderer());
+            Debugger.showDebugMessage("LIST created.");
+            return list;
+        }
     }
 }

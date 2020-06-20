@@ -37,7 +37,10 @@
                     <preferred-size width="150" height="40"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-3282177"/>
+                  <foreground color="-1"/>
+                </properties>
                 <border type="bevel-lowered"/>
                 <children/>
               </grid>
@@ -373,7 +376,9 @@
                     <preferred-size width="150" height="40"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-3282177"/>
+                </properties>
                 <border type="bevel-lowered"/>
                 <children/>
               </grid>
@@ -709,7 +714,9 @@
                     <preferred-size width="150" height="40"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-3282177"/>
+                </properties>
                 <border type="bevel-lowered"/>
                 <children/>
               </grid>
