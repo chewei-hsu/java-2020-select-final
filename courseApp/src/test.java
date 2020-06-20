@@ -22,5 +22,6 @@ public class test {
     }
     private void createUIComponents() {
         test1 = new JListCustomRenderer().createPanel(DB.getCourse(null,"108-1"));
+        System.out.println("xxxx");
     }
 }
