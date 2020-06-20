@@ -9,12 +9,12 @@ public class CourseData {
 
     }
 
-    public CourseData(String random_num, String course_code, String course_name, int credit, int duration, int isMust, String teacher, int method, ArrayList<Integer> time, String location, int student_bound, String ps) {
+    public CourseData(String random_num, String course_code, String course_name, int credit, int duration, int isMust, String teacher, int method, String time, String location, int student_bound, String ps) {
         this.random_num = random_num;
         this.course_code = course_code;
         this.course_name = course_name;
         this.teacher = teacher;
-        this.time = time;
+        this.time = Processor.timeStringToInt(time);
         this.location = location;
         this.ps = ps;
         this.credit = credit;

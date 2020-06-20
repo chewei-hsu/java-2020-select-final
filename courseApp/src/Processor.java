@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 public class Processor {
-    public static ArrayList<Integer> timeWordToInt(String time){
+
+    public static ArrayList<Integer> timeStringToInt(String time){
         ArrayList<Integer> timeInt = new ArrayList<Integer>();
         int currentDay, currentIndex = 0;
         while(currentIndex < time.length()){
@@ -13,24 +14,25 @@ public class Processor {
                     break;
                 }
                 int classNum;
-                if(time.charAt(currentIndex) >= 48 && time.charAt(currentIndex) <= 57){
-                    classNum = time.charAt(currentDay) - 48;
-                    if(time.charAt(currentIndex) == 49 && (currentIndex+1)< time.length() && time.charAt(currentIndex+1) == 48){
+                if(time.charAt(currentIndex) >= '0' && time.charAt(currentIndex) <= '9'){
+                    classNum = time.charAt(currentIndex) - 48;
+                    if(time.charAt(currentIndex) == '1' && (currentIndex+1)< time.length() && time.charAt(currentIndex+1) == '0'){
                         classNum = 10;
                         newIndex++;
                     }
                 }
-                else if(time.charAt(currentIndex) >= 65 && time.charAt(currentIndex) <= 68){
-                    classNum = time.charAt(currentDay) - 54;
+                else if(time.charAt(currentIndex) >= 'A' && time.charAt(currentIndex) <= 'D'){
+                    classNum = time.charAt(currentIndex) - 54;
                 }
-                else if(time.charAt(currentIndex) == 44 && time.charAt(currentIndex) == 32){
+                else if(time.charAt(currentIndex) == ',' || time.charAt(currentIndex) == ' '){
                     newIndex++;
+                    currentIndex = newIndex;
                     continue;
                 }
                 else{
+                    System.out.println("xxxx");
                     break;
                 }
-                System.out.println(currentDay+" "+classNum);
                 timeInt.add((currentDay-1)*14+classNum);
                 currentIndex = newIndex;
                 currentIndex++;
