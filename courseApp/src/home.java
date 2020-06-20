@@ -240,9 +240,9 @@ public class home {
                         int index = theList.locationToIndex(mouseEvent.getPoint());
                         if (index >= 0) {
                             Object o = theList.getModel().getElementAt(index);
-
+                            Debugger.showDebugMessage("Single-clicked on: " + o);
                             for (int i = 0; i < displayData.size(); i++) {
-                                if (displayData.get(i).getCourse_name().equals(o.toString())) {
+                                if (displayData.get(i).getRandom_num().equals(o.toString())) {
                                     detailData = displayData.get(i);
                                     refreshDetailPanel();
                                     break;
@@ -261,6 +261,7 @@ public class home {
                                     break;
                                 }
                             }
+                            ArrayList<ArrayList<CourseData>> oldCourseStats = Processor.mappingToTableArray(choosedCourse);
                             boolean isExist = false;
                             CourseData target = null;
                             for(CourseData item:choosedCourse){
@@ -274,12 +275,19 @@ public class home {
                                 choosedCourse.remove(target);
                             }
                             else{
-                                choosedCourse.add(detailData);
+                                if(Processor.courseAddCheck(oldCourseStats,detailData.getTime())){
+                                    choosedCourse.add(detailData);
+                                }
+                                else {
+                                    JOptionPane.showMessageDialog(null,"新增課程與已選課程衝堂! \n 最多只允許衝堂兩堂","無法新增課程",JOptionPane.WARNING_MESSAGE);
+                                }
                             }
                             System.out.println(choosedCourse);
                             courseStats = Processor.mappingToTableArray(choosedCourse);
                             refreshTable(courseStats);
                             refreshDetailPanel();
+
+
                         }
                     }
                 }

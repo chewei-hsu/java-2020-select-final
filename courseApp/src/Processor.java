@@ -1,8 +1,8 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Processor {
-
     public static ArrayList<Integer> timeStringToInt(String time){
         ArrayList<Integer> timeInt = new ArrayList<Integer>();
         if(time == null){
@@ -92,6 +92,18 @@ public class Processor {
         return mappingTable;
     }
 
+    public static boolean courseAddCheck(ArrayList<ArrayList<CourseData>> stats,ArrayList<Integer> times){
+        boolean isFull = false;
+        for(Integer time:times){
+            Debugger.showDebugMessage(stats.get(time).size()+"");
+            if(stats.get(time).size()>=2){
+                isFull = true;
+                break;
+            }
+        }
+        return !isFull;
+    }
+
     private static int parseDay(char ch){
         switch(ch){
             case '一':
@@ -133,5 +145,29 @@ public class Processor {
         else{
             return Character.toString(i+54);
         }
+    }
+
+    public static Color colorGenerator(String randNum){
+        int parsedNum = Integer.valueOf(randNum);
+        int i1 = 220-parsedNum % 50;
+        int i2 = 220-(100000-parsedNum) % 50;
+        int index = parsedNum % 3;
+        Color result = new Color(255,255,255);
+        switch (index){
+            case 0:
+                result = new Color(255,i1,i2);
+                Debugger.showDebugMessage(result.toString());
+                break;
+            case 1:
+                result = new Color(i1,255,i2);
+                break;
+            case 2:
+                result = new Color(i1,i2,255);
+                break;
+            default:
+                result = new Color(255,255,255);
+                break;
+        }
+        return result;
     }
 }

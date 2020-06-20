@@ -108,11 +108,11 @@ public class courseTable {
                 //Debugger.showDebugMessage("Dataset; "+i+" This time is Empty!");
             }
             else if(home.courseStats.get(i).size()==1) {
-                panelTemp[i] = new courseContent(home.courseStats.get(i).get(0).getCourse_name()).getPanel();
+                panelTemp[i] = new courseContent(home.courseStats.get(i).get(0)).getPanel();
                 //Debugger.showDebugMessage("Dataset; "+i+" This time is "+home.courseStats.get(i).get(0).getCourse_name());
             }
             else {
-                panelTemp[i] = new courseContent(home.courseStats.get(i).get(0).getCourse_name(),home.courseStats.get(i).get(1).getCourse_name()).getPanel();
+                panelTemp[i] = new courseContent(home.courseStats.get(i).get(0),home.courseStats.get(i).get(1)).getPanel();
                 //Debugger.showDebugMessage("Dataset; "+i+" This time is "+home.courseStats.get(i).get(0).getCourse_name());
             }
         }

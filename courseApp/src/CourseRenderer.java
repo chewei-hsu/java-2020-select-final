@@ -14,6 +14,7 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
     private Color COLOR_PRIMARY = new Color(0, 45, 98);
     private Color COLOR_SECONDARY = new Color(82, 117, 129, 155);
     private Color COLOR_TIME = new Color(203, 127, 35);
+    private Color COLOR_SELECTED = new Color(255, 236, 204);
     private JPanel panelRight = new JPanel(new GridLayout(0,1));
     private JPanel panelLeft = new JPanel(new GridLayout(0,1));
     private JPanel rightHolder = new JPanel(new BorderLayout(5,5));
@@ -34,6 +35,16 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
         holder.add(rightHolder, BorderLayout.EAST);
         holder.add(panelLeft, BorderLayout.CENTER);
         add(holder);
+    }
+    public boolean selectCondition(CourseData cd){
+        boolean isExist = false;
+        for(CourseData item:home.choosedCourse){
+            if(item.getRandom_num().equals(cd.random_num)){
+                isExist = true;
+                break;
+            }
+        }
+        return isExist;
     }
     @Override
     public Component getListCellRendererComponent(JList<? extends CourseData> list, CourseData courseData, int index, boolean isSelected, boolean cellHasFocus) {
@@ -68,11 +79,8 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
         lbTime1.setForeground(COLOR_TIME);
         lbTime1.setFont(new Font(Font.DIALOG,Font.BOLD,16));
         lbTime1.setText(isDoubleTime? ("<html>"+trimmedTime[0]+"<br>"+trimmedTime[1]+"</html>"):rawTimeString);
-
         lbTime1.setHorizontalAlignment(JTextField.CENTER);
         lbTime1.setVerticalAlignment(JTextField.CENTER);
-
-
 
 
 
@@ -83,12 +91,19 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
             lbTime1.setBackground(list.getSelectionBackground());
             lbTeacher.setBackground(list.getSelectionBackground());
             setBackground(list.getSelectionBackground());
-        } else { // when don't select
+        } else if(!selectCondition(courseData)){ // when don't select
             lbTitle.setBackground(LIGHT_GRAY);
             lbCourseCode.setBackground(LIGHT_GRAY);
             lbTime1.setBackground(LIGHT_GRAY);
             lbTeacher.setBackground(LIGHT_GRAY);
             setBackground(Color.GRAY);
+        }
+        else{
+            lbTitle.setBackground(Processor.colorGenerator(courseData.getRandom_num()));
+            lbCourseCode.setBackground(Processor.colorGenerator(courseData.getRandom_num()));
+            lbTime1.setBackground(Processor.colorGenerator(courseData.getRandom_num()));
+            lbTeacher.setBackground(Processor.colorGenerator(courseData.getRandom_num()));
+            setBackground(Processor.colorGenerator(courseData.getRandom_num()));
         }
         return this;
     }
