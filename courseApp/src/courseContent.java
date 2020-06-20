@@ -14,7 +14,13 @@ public class courseContent {
         name.setText(courseName);
     }
     public JPanel getPanel(){
+        name.setFont(new Font("Taipei Sans TC Beta",Font.BOLD,16));
+        name.setBackground(Color.RED);
+        name.setMinimumSize(new Dimension(100,60));
+        name.setPreferredSize(new Dimension(100,60));
+        name.setLineWrap(true);
         content.add(name);
+        content.setBackground(Color.RED);
         return content;
     }
 }

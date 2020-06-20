@@ -98,23 +98,22 @@ public class courseTable {
     }
     public void tableRender(){
         JPanel[] panelTemp = new JPanel[70];
-        Debugger.showDebugMessage("Created");
         for(int i=0;i<70;i++){
             if(home.courseStats == null){
                 panelTemp[i] = new JPanel();
-                Debugger.showDebugMessage("Dataset; "+i+" No data!");
+                //Debugger.showDebugMessage("Dataset; "+i+" No data!");
             }
             else if(home.courseStats.get(i).size()==0){
                 panelTemp[i] = new JPanel();
-                Debugger.showDebugMessage("Dataset; "+i+" This time is Empty!");
+                //Debugger.showDebugMessage("Dataset; "+i+" This time is Empty!");
             }
             else if(home.courseStats.get(i).size()==1) {
                 panelTemp[i] = new courseContent(home.courseStats.get(i).get(0).getCourse_name()).getPanel();
-                Debugger.showDebugMessage("Dataset; "+i+" This time is "+home.courseStats.get(i).get(0).getCourse_name());
+                //Debugger.showDebugMessage("Dataset; "+i+" This time is "+home.courseStats.get(i).get(0).getCourse_name());
             }
             else {
                 panelTemp[i] = new courseContent(home.courseStats.get(i).get(0).getCourse_name()).getPanel();
-                Debugger.showDebugMessage("Dataset; "+i+" This time is "+home.courseStats.get(i).get(0).getCourse_name());
+                //Debugger.showDebugMessage("Dataset; "+i+" This time is "+home.courseStats.get(i).get(0).getCourse_name());
             }
         }
 

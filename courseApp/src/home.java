@@ -148,7 +148,7 @@ public class home {
         tableHolder.remove(tableDisplay);
         tableDisplay = null;
         tableDisplay = new courseTable(data).getPanel();
-        resultHolder.add(tableDisplay,"t");
+        tableHolder.add(tableDisplay,"t");
         tableLayout = (CardLayout)tableHolder.getLayout();
         tableLayout.show(tableHolder,"t");
     }
@@ -256,13 +256,22 @@ public class home {
                             Object o = theList.getModel().getElementAt(index);
                             Debugger.showDebugMessage("Double-clicked on: " + o);
                             for (int i = 0; i < displayData.size(); i++) {
-                                if (displayData.get(i).getCourse_name().equals(o.toString())) {
+                                if (displayData.get(i).getRandom_num().equals(o.toString())) {
                                     detailData = displayData.get(i);
                                     break;
                                 }
                             }
-                            if(choosedCourse.contains(detailData)){
-                                choosedCourse.remove(detailData);
+                            boolean isExist = false;
+                            CourseData target = null;
+                            for(CourseData item:choosedCourse){
+                                if(item.getRandom_num().equals(detailData.random_num)){
+                                    isExist = true;
+                                    target=item;
+                                    break;
+                                }
+                            }
+                            if(isExist){
+                                choosedCourse.remove(target);
                             }
                             else{
                                 choosedCourse.add(detailData);
@@ -270,6 +279,7 @@ public class home {
                             System.out.println(choosedCourse);
                             courseStats = Processor.mappingToTableArray(choosedCourse);
                             refreshTable(courseStats);
+                            refreshDetailPanel();
                         }
                     }
                 }
@@ -285,7 +295,6 @@ public class home {
         public JList<CourseData> createList() {
             DefaultListModel<CourseData> model = new DefaultListModel<CourseData>();
             for (CourseData val : displayData) {
-                Debugger.showDebugMessage("Model ADDED!");
                 model.addElement(val);
             }
             JList<CourseData> list = new JList<CourseData>(model);

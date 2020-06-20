@@ -71,6 +71,6 @@ public class CourseData {
     }
 
     public String toString(){
-        return course_name;
+        return random_num;
     }
 }
