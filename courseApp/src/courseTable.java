@@ -76,5 +76,6 @@ public class courseTable {
 
     public JPanel getPanel(){
         return panel1;
+        //AAAAAAAAAAAAAAAAAAAA
     }
 }
