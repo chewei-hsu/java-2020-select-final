@@ -60,10 +60,8 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
         if(rawTimeString.contains(" ")){
             isDoubleTime = true;
             trimmedTime = rawTimeString.split(" ");
-            Debugger.showDebugMessage("Time one: "+trimmedTime[0]+" Time two: "+trimmedTime[1]);
         }
         else {
-            Debugger.showDebugMessage("Only one: "+rawTimeString);
             isDoubleTime = false;
         }
         lbTime1.setOpaque(true);
