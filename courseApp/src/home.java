@@ -131,8 +131,8 @@ public class home {
             public void componentResized(ComponentEvent evt) {
                 Dimension size = frame.getSize();
                 if (size.getWidth() < width || size.getHeight() < height) {
-                    JOptionPane.showMessageDialog(null,"過小的視窗大小會影響使用體驗!","視窗大小",JOptionPane.WARNING_MESSAGE);
-                    frame.setSize((int) width+100, (int) height+50);
+                    frame.setSize((int) width + 100, (int) height + 50);
+                    JOptionPane.showMessageDialog(null,"過小的視窗大小會影響使用體驗! \n 建議視窗大小：1024*768","視窗大小警告",JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
