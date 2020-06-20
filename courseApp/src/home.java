@@ -148,7 +148,7 @@ public class home {
         tableHolder.remove(tableDisplay);
         tableDisplay = null;
         tableDisplay = new courseTable(data).getPanel();
-        resultHolder.add(tableDisplay,"t");
+        tableHolder.add(tableDisplay,"t");
         tableLayout = (CardLayout)tableHolder.getLayout();
         tableLayout.show(tableHolder,"t");
     }

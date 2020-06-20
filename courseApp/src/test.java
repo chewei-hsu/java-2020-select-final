@@ -21,7 +21,7 @@ public class test {
         frame.setVisible(true);
         for(int i = 1 ; i < 6 ; i++){
             for(int j = 1 ; j < 15 ; j++){
-                System.out.println("holder"+i+"_"+j+" = panelTemp["+((i-1)*14+(j-1))+"];");
+                System.out.println("text"+i+j+".set");
             }
         }
     }

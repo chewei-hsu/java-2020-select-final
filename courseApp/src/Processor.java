@@ -85,7 +85,6 @@ public class Processor {
         }
         for(CourseData course : choosedCourse){
             for(Integer i : course.time){
-                Debugger.showDebugMessage("[PROCESSOR] Time: "+i+" Name: "+course.getCourse_name());
                 mappingTable.get(i).add(course);
             }
         }

@@ -6,12 +6,12 @@ public class courseContent {
     private JTextArea name = new JTextArea();
     private String courseName = "Default";
     public courseContent(){
-        courseName = "Default";
-        name.setText(courseName);
+        name.setText("Default");
+        Debugger.showDebugMessage("Set name to: Default");
     }
     public courseContent(String i){
-        courseName = i;
-        name.setText(courseName);
+        name.setText(i);
+        Debugger.showDebugMessage("Set name to: "+i);
     }
     public JPanel getPanel(){
         content.add(name);
