@@ -49,12 +49,30 @@ public class DB {
         return flag;
     }
 
-    public static ArrayList<CourseData> getCourse(String searchWord,String semester){
+    public static ArrayList<CourseData> getCourse(String searchWord,String semester,int type){
         connectToDB();
         String sql = "SELECT * FROM \'" + semester+"\'";
         Statement stmt = null;
+        boolean firstConstraint = true;
         if(searchWord != null){
-            sql += "WHERE course_name LIKE \'%" + searchWord+"%\'";
+            if(firstConstraint){
+                firstConstraint = false;
+                sql += " WHERE ";
+            }
+            else{
+                sql += " AND ";
+            }
+            sql += "course_name LIKE \'%" + searchWord+"%\' ";
+        }
+        if(type != 0){
+            if(firstConstraint){
+                firstConstraint = false;
+                sql += " WHERE ";
+            }
+            else{
+                sql += " AND ";
+            }
+            sql += "isMust = \'" + (type-1) + "\'";
         }
         try{
             stmt = connection.createStatement();

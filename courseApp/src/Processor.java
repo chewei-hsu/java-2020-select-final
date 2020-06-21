@@ -175,7 +175,7 @@ public class Processor {
     }
 
     public static void autoChooseCourse(String semester) throws NullPointerException {
-        ArrayList<CourseData> cdal = new ArrayList<CourseData>(DB.getCourse(null,semester));
+        ArrayList<CourseData> cdal = new ArrayList<CourseData>(DB.getCourse(null,semester,0));
         Collections.shuffle(cdal);
         for(int j = 0 ; j<cdal.size() ; j++){
             CourseData cd = cdal.get(j);

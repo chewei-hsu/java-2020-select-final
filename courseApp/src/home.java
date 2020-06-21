@@ -53,7 +53,7 @@ public class home {
     public home() {
         initDetailElement();
         selected.setVisible(false);
-        searchResult = resultList.createPanel(DB.getCourse(null, semesterSelect.getSelectedItem().toString()));
+        searchResult = resultList.createPanel(DB.getCourse(null, semesterSelect.getSelectedItem().toString(),isMustSelect.getSelectedIndex()));
         tableDisplay = new courseTable().getPanel();
         selected.setBorder(new LineBorder(Color.GRAY, 3));
         resultHolder.add(searchResult,"r");
@@ -180,7 +180,7 @@ public class home {
             searchCourse=searchField.getText();
         }
         System.out.println("Search for:" + searchCourse);
-        ArrayList<CourseData> CD = DB.getCourse(searchCourse,semesterSelect.getSelectedItem().toString());
+        ArrayList<CourseData> CD = DB.getCourse(searchCourse,semesterSelect.getSelectedItem().toString(),isMustSelect.getSelectedIndex());
         if(CD.size() == 0){
             layout.show(resultHolder,"n");
         }
