@@ -425,9 +425,9 @@
                     <properties>
                       <model>
                         <item value="全部"/>
-                        <item value="必帶"/>
-                        <item value="必修"/>
                         <item value="選修"/>
+                        <item value="必修"/>
+                        <item value="必帶"/>
                       </model>
                     </properties>
                   </component>

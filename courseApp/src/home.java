@@ -163,6 +163,7 @@ public class home {
                     choosedCourse.clear();
                     courseStats = Processor.mappingToTableArray(choosedCourse);
                     refreshTable(courseStats);
+                    search();
                 }
                 else{
                     semesterSelect.setSelectedIndex(currentSemesterIndex);
