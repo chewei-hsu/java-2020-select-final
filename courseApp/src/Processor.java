@@ -175,31 +175,28 @@ public class Processor {
     public static void autoChooseCourse(String semester) throws NullPointerException {
         ArrayList<CourseData> cdal = DB.getCourse(null,semester);
         Collections.shuffle(cdal);
-        for(int i = 0 ; i < 70 ; i++){
-            System.out.println();
-            ArrayList<CourseData> time = home.courseStats.get(i);
-            if(time.size() == 0){
-                for(int j = 0 ; j<cdal.size() ; j++){
-                    CourseData cd = cdal.get(j);
-                    System.out.println("Checking for : "+cd.course_name);
-                    if(home.choosedCourse.contains(cd) || cd.time == null){
-                        System.out.println(home.choosedCourse.contains(cd) );
-                        continue;
-                    }
-                    boolean conflict = false;
-                    for(int courseTime : cd.time){
-                        if(home.courseStats.get(courseTime-1).size() != 0){
-                            conflict = true;
-                            break;
-                        }
-                    }
-                    if(conflict){
-                        continue;
-                    }
-                    home.choosedCourse.add(cd);
-                    home.courseStats = mappingToTableArray(home.choosedCourse);
-                }
+        for(int j = 0 ; j<cdal.size() ; j++){
+            CourseData cd = cdal.get(j);
+            System.out.println("Checking for : "+cd.course_name);
+            if(home.choosedCourse.contains(cd) || cd.time == null){
+                cdal.remove(cd);
+                continue;
             }
+            boolean conflict = false;
+            for(int courseTime : cd.time){
+                if(home.courseStats.get(courseTime).size() != 0){
+                    conflict = true;
+                    cdal.remove(cd);
+                    break;
+                }
+                System.out.println(home.courseStats.get(courseTime).size());
+            }
+            if(conflict){
+                continue;
+            }
+            home.choosedCourse.add(cd);
+            home.courseStats = mappingToTableArray(home.choosedCourse);
+            cdal.remove(cd);
         }
     }
 }
