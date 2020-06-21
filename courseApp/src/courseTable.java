@@ -81,8 +81,9 @@ public class courseTable {
     }
     public courseTable(ArrayList<ArrayList<CourseData>> mappingTable){
         for(int i = 0;i<70;i++){
-            if(home.courseStats.get(i).size()>0)
-                Debugger.showDebugMessage("[TABLE] Time: "+i+" Name: "+home.courseStats.get(i).get(0).getCourse_name());
+            if(home.courseStats.get(i).size()>0){
+                //Debugger.showDebugMessage("[TABLE] Time: "+i+" Name: "+home.courseStats.get(i).get(0).getCourse_name())
+            }
         }
     }
     public JPanel getPanel(){

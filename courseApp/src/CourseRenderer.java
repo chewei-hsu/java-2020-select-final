@@ -48,13 +48,13 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
     }
     @Override
     public Component getListCellRendererComponent(JList<? extends CourseData> list, CourseData courseData, int index, boolean isSelected, boolean cellHasFocus) {
-        lbTitle.setFont(new Font(Font.DIALOG,Font.BOLD,18));
+        lbTitle.setFont(new Font("Taipei Sans TC Beta",Font.BOLD,18));
         lbTitle.setText(courseData.getCourse_name());
         lbTitle.setOpaque(true);
         lbTitle.setForeground(Color.DARK_GRAY);
 
         lbTeacher.setForeground(COLOR_PRIMARY);
-        lbTeacher.setFont(new Font(Font.DIALOG, Font.PLAIN, 16));
+        lbTeacher.setFont(new Font("Taipei Sans TC Beta", Font.PLAIN, 16));
         lbTeacher.setText(courseData.getTeacher());
         lbTeacher.setHorizontalAlignment(JTextField.LEFT);
         lbTeacher.setVerticalAlignment(JTextField.CENTER);
@@ -62,7 +62,7 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
 
         lbCourseCode.setText(courseData.getCourse_code());
         lbCourseCode.setOpaque(true);
-        lbCourseCode.setFont(new Font(Font.DIALOG,Font.ITALIC,12));
+        lbCourseCode.setFont(new Font("Taipei Sans TC Beta",Font.ITALIC,12));
         lbCourseCode.setForeground(COLOR_SECONDARY);
         String rawTimeString = Processor.timeIntToString(courseData.getTime());
         String[] trimmedTime = new String[3];
@@ -77,7 +77,7 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
         }
         lbTime1.setOpaque(true);
         lbTime1.setForeground(COLOR_TIME);
-        lbTime1.setFont(new Font(Font.DIALOG,Font.BOLD,16));
+        lbTime1.setFont(new Font("Taipei Sans TC Beta",Font.BOLD,16));
         lbTime1.setText(isDoubleTime? ("<html>"+trimmedTime[0]+"<br>"+trimmedTime[1]+"</html>"):rawTimeString);
         lbTime1.setHorizontalAlignment(JTextField.CENTER);
         lbTime1.setVerticalAlignment(JTextField.CENTER);

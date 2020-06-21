@@ -33,6 +33,7 @@ public class home {
     private JPanel weekdayHolder;
     private JPanel tableHolder;
     private JPanel tableDisplay;
+    private JPanel holder1_1;
     private String searchTemp = "";
     private String searchCourse = null;
     private CardLayout layout;
@@ -62,19 +63,32 @@ public class home {
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                search();
+                if(searchField.getText().equals("debug -on")){
+                    Debugger.setDebugMode(true);
+                }
+                else if(searchField.getText().equals("debug -off")){
+                    Debugger.setDebugMode(false);
+                }
+                else{
+                    search();
+                }
+
             }
         });
         btnLucky.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                try{
-                    Processor.autoChooseCourse(semesterSelect.getSelectedItem().toString());
-                    refreshTable(courseStats);
-                }catch(NullPointerException ne){
+                if(choosedCourse.size() == 0){
                     JOptionPane.showMessageDialog(null,"請先選擇至少一門課程再使用此功能","你沒有必帶嗎",JOptionPane.ERROR_MESSAGE);
                 }
-
+                else{
+                    try{
+                        Processor.autoChooseCourse(semesterSelect.getSelectedItem().toString());
+                        refreshTable(courseStats);
+                    }catch(NullPointerException ne){
+                        JOptionPane.showMessageDialog(null,"請先選擇至少一門課程再使用此功能","你沒有必帶嗎",JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
         });
         searchField.addFocusListener(new FocusAdapter() {
@@ -106,7 +120,32 @@ public class home {
                 int keyCode = e.getKeyCode();
                 if(keyCode == 10){
                     //Enter button
-                    search();
+                    if(searchField.getText().equals("debug -on")){
+                        if(Debugger.getDebugMode()){
+                            JOptionPane.showMessageDialog(null,"開發者模式已經是開啟狀態\n如需關閉請輸入 debug -off","開發者模式",JOptionPane.ERROR_MESSAGE);
+                        }
+                        else{
+                            int check = JOptionPane.showConfirmDialog(null,"您確定要進入開發者模式嗎?\n開發者模式可能讓程式穩定性下降或顯示敏感資訊，請小心使用。 ","開發者模式確認",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+                            if(check == 0){
+                                Debugger.setDebugMode(true);
+                                JOptionPane.showMessageDialog(null,"已開啟開發者模式","開發者模式",JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        }
+
+                    }
+                    else if(searchField.getText().equals("debug -off")){
+                        if(!Debugger.getDebugMode()){
+                            JOptionPane.showMessageDialog(null,"開發者模式已經是關閉狀態\n如需開啟請輸入 debug -on","開發者模式",JOptionPane.ERROR_MESSAGE);
+                        }
+                        else{
+                            Debugger.setDebugMode(false);
+                            JOptionPane.showMessageDialog(null,"已關閉開發者模式","開發者模式",JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+                    }
+                    else{
+                        search();
+                    }
                 }
             }
         });
