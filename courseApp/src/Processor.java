@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class Processor {
@@ -156,7 +157,7 @@ public class Processor {
         switch (index){
             case 0:
                 result = new Color(255,i1,i2);
-                Debugger.showDebugMessage(result.toString());
+            //    Debugger.showDebugMessage(result.toString());
                 break;
             case 1:
                 result = new Color(i1,255,i2);
@@ -169,5 +170,36 @@ public class Processor {
                 break;
         }
         return result;
+    }
+
+    public static void autoChooseCourse(String semester) throws NullPointerException {
+        ArrayList<CourseData> cdal = DB.getCourse(null,semester);
+        Collections.shuffle(cdal);
+        for(int i = 0 ; i < 70 ; i++){
+            System.out.println();
+            ArrayList<CourseData> time = home.courseStats.get(i);
+            if(time.size() == 0){
+                for(int j = 0 ; j<cdal.size() ; j++){
+                    CourseData cd = cdal.get(j);
+                    System.out.println("Checking for : "+cd.course_name);
+                    if(home.choosedCourse.contains(cd) || cd.time == null){
+                        System.out.println(home.choosedCourse.contains(cd) );
+                        continue;
+                    }
+                    boolean conflict = false;
+                    for(int courseTime : cd.time){
+                        if(home.courseStats.get(courseTime-1).size() != 0){
+                            conflict = true;
+                            break;
+                        }
+                    }
+                    if(conflict){
+                        continue;
+                    }
+                    home.choosedCourse.add(cd);
+                    home.courseStats = mappingToTableArray(home.choosedCourse);
+                }
+            }
+        }
     }
 }

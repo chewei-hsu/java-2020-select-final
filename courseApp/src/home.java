@@ -68,6 +68,12 @@ public class home {
         btnLucky.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                try{
+                    Processor.autoChooseCourse(semesterSelect.getSelectedItem().toString());
+                    refreshTable(courseStats);
+                }catch(NullPointerException ne){
+                    JOptionPane.showMessageDialog(null,"請先選擇至少一門課程再使用此功能","你沒有必帶嗎",JOptionPane.ERROR_MESSAGE);
+                }
 
             }
         });
@@ -286,8 +292,6 @@ public class home {
                             courseStats = Processor.mappingToTableArray(choosedCourse);
                             refreshTable(courseStats);
                             refreshDetailPanel();
-
-
                         }
                     }
                 }
@@ -310,5 +314,6 @@ public class home {
             Debugger.showDebugMessage("LIST created.");
             return list;
         }
+
     }
 }

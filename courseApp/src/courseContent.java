@@ -80,4 +80,14 @@ public class courseContent {
         name1.setEditable(false);
         return content;
     }
+
+    public JPanel getPanel(boolean autoGenerateCourse){
+        name1.setFont(new Font("Taipei Sans TC Beta",Font.BOLD,16));
+        name1.setBackground(Color.MAGENTA);
+        name1.setMinimumSize(new Dimension(100,20));
+        name1.setPreferredSize(new Dimension(100,20));
+        name1.setMargin(new Insets(1,5,1,5));
+        name1.setEditable(false);
+        return content;
+    }
 }
