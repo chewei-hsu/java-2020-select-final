@@ -28,6 +28,7 @@ public class Processor {
                 }
                 int classNum;
                 if(time.charAt(currentIndex) >= '0' && time.charAt(currentIndex) <= '9'){
+                    //ASCII is so hard
                     classNum = time.charAt(currentIndex) - 48;
                     if(time.charAt(currentIndex) == '1' && (currentIndex+1)< time.length() && time.charAt(currentIndex+1) == '0'){
                         classNum = 10;
@@ -129,7 +130,7 @@ public class Processor {
     }
 
     /**
-     * helping method of timeStringToInt
+     * helping method of timeStringToInt()
      * @param ch
      * @return
      */
@@ -151,7 +152,7 @@ public class Processor {
     }
 
     /**
-     * helping method of timeIntToString
+     * helping method of timeIntToString()
      * @param i
      * @return
      */
@@ -173,7 +174,7 @@ public class Processor {
     }
 
     /**
-     * helping method of timeIntToString. parse 11~14 into A~D
+     * helping method of timeIntToString(). parse 11~14 into A~D
      * @param i
      * @return
      */
