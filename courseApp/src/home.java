@@ -16,7 +16,6 @@ public class home {
     private JTextField searchField;
     private JButton btnLucky;
     private JButton btnSearch;
-    private JPanel btnHolder;
     private JPanel resultHolder;
     private JPanel notFoundPanel;
     private JLabel lbName;
@@ -34,6 +33,7 @@ public class home {
     private JPanel tableHolder;
     private JPanel tableDisplay;
     private JPanel holder1_1;
+    private JComboBox isMustSelect;
     private String searchTemp = "";
     private String searchCourse = null;
     private CardLayout layout;
