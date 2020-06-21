@@ -3,6 +3,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
+// used to render the cell element of the search result custom JList.
 public class CourseRenderer extends JPanel implements ListCellRenderer<CourseData> {
     private JLabel lbTitle = new JLabel();
     private JLabel lbCourseCode = new JLabel();
@@ -36,6 +37,7 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
         holder.add(panelLeft, BorderLayout.CENTER);
         add(holder);
     }
+    // check if the course is in the choosed data array.
     public boolean selectCondition(CourseData cd){
         boolean isExist = false;
         for(CourseData item:home.choosedCourse){
@@ -46,6 +48,8 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
         }
         return isExist;
     }
+    // override the JList function.
+    // configure the elements in the cell element.
     @Override
     public Component getListCellRendererComponent(JList<? extends CourseData> list, CourseData courseData, int index, boolean isSelected, boolean cellHasFocus) {
         lbTitle.setFont(new Font("Taipei Sans TC Beta",Font.BOLD,18));
@@ -98,7 +102,7 @@ public class CourseRenderer extends JPanel implements ListCellRenderer<CourseDat
             lbTeacher.setBackground(LIGHT_GRAY);
             setBackground(Color.GRAY);
         }
-        else{
+        else{ // when the course is in the choosed course array, then paint it using generated unique color.
             lbTitle.setBackground(Processor.colorGenerator(courseData.getRandom_num()));
             lbCourseCode.setBackground(Processor.colorGenerator(courseData.getRandom_num()));
             lbTime1.setBackground(Processor.colorGenerator(courseData.getRandom_num()));

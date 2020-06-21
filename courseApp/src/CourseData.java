@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class CourseData {
+    // data structure of CourseData.
     String random_num, course_code,course_name,teacher,ps,location;
     int credit,duration,isMust,method,student_bound;
     ArrayList<Integer> time;
@@ -22,6 +23,8 @@ public class CourseData {
         this.method = method;
         this.student_bound = student_bound;
     }
+
+    // getter methods.
 
     public String getRandom_num() {
         return random_num;

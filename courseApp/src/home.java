@@ -8,7 +8,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 public class home {
-    private static JFrame frame = new JFrame("Course"); // 設定視窗標題
+    private static JFrame frame = new JFrame("Course"); // set window title
     private JPanel searchBarAndBtn;
     private JPanel searchResult;
     private JPanel selected;
@@ -206,15 +206,14 @@ public class home {
     public static void main(String[] args) {
         Debugger.setDebugMode(false);
         try {
-            UIManager.setLookAndFeel(home.metalUI); // 使用Metal UI 模式啟動
-            UIManager.setLookAndFeel(metalUI); // 使用Metal UI 模式啟動
+            UIManager.setLookAndFeel(metalUI);  // launch using Metal UI mode
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
         frame.setContentPane(new home().panel1);
         frame.pack();
         frame.getContentPane().requestFocusInWindow();
-        frame.setSize(1024, 900); // 設定初始視窗大小
+        frame.setSize(1024, 900); // set initial frame size
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         windowSizeLimiter(frame, 1000, 900);
