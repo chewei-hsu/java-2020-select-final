@@ -4,12 +4,19 @@ import java.util.Collections;
 import java.util.Iterator;
 
 public class Processor {
+
+    /**
+     * The data from nol.ntu.edu.tw give the time in the form of "Xa,b Yc,d" , XY are days in week, abcd are the course number
+     * To storage time in proper date structure, we parse it in int.
+     * First class on Monday is 1,the last class on friday is 70
+     * @param time origin data from nol.ntu.edu.tw
+     * @return Arraylist include all class time
+     */
     public static ArrayList<Integer> timeStringToInt(String time){
         ArrayList<Integer> timeInt = new ArrayList<Integer>();
         if(time == null){
             return timeInt;
         }
-        System.out.println("Before parse : " + time);
         int currentDay, currentIndex = 0;
         while(currentIndex < time.length()){
             currentDay = parseDay(time.charAt(currentIndex));
@@ -21,6 +28,7 @@ public class Processor {
                 }
                 int classNum;
                 if(time.charAt(currentIndex) >= '0' && time.charAt(currentIndex) <= '9'){
+                    //ASCII is so hard
                     classNum = time.charAt(currentIndex) - 48;
                     if(time.charAt(currentIndex) == '1' && (currentIndex+1)< time.length() && time.charAt(currentIndex+1) == '0'){
                         classNum = 10;
@@ -43,12 +51,14 @@ public class Processor {
                 currentIndex++;
             }
         }
-        System.out.println("After int parse :" + timeInt);
-        System.out.println("Back to string :" + timeIntToString(timeInt));
-        System.out.println();
         return timeInt;
     }
 
+    /**
+     * While displaying to the user, the int parsed by timeStringToInt must parse back to String in the origin form
+     * @param parsed time
+     * @return original time string
+     */
     public static String timeIntToString(ArrayList<Integer> time){
         if(time.isEmpty()){
             return "請洽系所辦";
@@ -79,6 +89,12 @@ public class Processor {
         return parsedTime;
     }
 
+    /**
+     * To make the data structure tight, time is first store as a property of course
+     * but when rendering the course teble, the relationshi[ need to be inverse, course storage by class time index
+     * @param choosedCourse the classes going to be put on the course table
+     * @return an arraylist of arraylist, each arraylist contain all classes taking place at that time
+     */
     public static ArrayList<ArrayList<CourseData>> mappingToTableArray(ArrayList<CourseData> choosedCourse){
         ArrayList<ArrayList<CourseData>> mappingTable = new ArrayList<ArrayList<CourseData>>();
         for(int i=0;i<70;i++){
@@ -92,6 +108,12 @@ public class Processor {
         return mappingTable;
     }
 
+    /**
+     * Check if there has enough space to add one more course. (We set that each class time can only contain 2 course)
+     * @param stats the course table
+     * @param times the class time we want to check
+     * @return true when it is legal to add.
+     */
     public static boolean courseAddCheck(ArrayList<ArrayList<CourseData>> stats,ArrayList<Integer> times){
         boolean isFull = false;
         if(stats == null){
@@ -107,6 +129,11 @@ public class Processor {
         return !isFull;
     }
 
+    /**
+     * helping method of timeStringToInt()
+     * @param ch
+     * @return
+     */
     private static int parseDay(char ch){
         switch(ch){
             case '一':
@@ -124,6 +151,11 @@ public class Processor {
         }
     }
 
+    /**
+     * helping method of timeIntToString()
+     * @param i
+     * @return
+     */
     private static char parseDay(int i){
         switch(i){
             case 1:
@@ -141,6 +173,11 @@ public class Processor {
         }
     }
 
+    /**
+     * helping method of timeIntToString(). parse 11~14 into A~D
+     * @param i
+     * @return
+     */
     private static String parseClassInt(int i){
         if(i<=10){
             return Integer.toString(i);
@@ -150,6 +187,11 @@ public class Processor {
         }
     }
 
+    /**
+     * generate different color to render on the course table . Different colors make different course more recognizable
+     * @param randNum
+     * @return one color
+     */
     public static Color colorGenerator(String randNum){
         int parsedNum = Integer.valueOf(randNum);
         int i1 = 220-parsedNum % 50;
@@ -174,6 +216,12 @@ public class Processor {
         return result;
     }
 
+    /**
+     * The actual implementation of lucky button, given the course table and this method will try to fill the empty class time by random pick a course and check if it is suitable for that time.
+     * This method directly modify the course table and choosed course . Need to be careful .
+     * @param semester current semester
+     * @throws NullPointerException
+     */
     public static void autoChooseCourse(String semester) throws NullPointerException {
         ArrayList<CourseData> cdal = new ArrayList<CourseData>(DB.getCourse(null,semester,0));
         Collections.shuffle(cdal);

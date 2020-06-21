@@ -3,11 +3,16 @@ import org.apache.commons.io.FilenameUtils;
 import java.sql.*;
 import java.util.ArrayList;
 
+
 public class DB {
     private static Connection connection = null;
     private static String url = FilenameUtils.separatorsToSystem( "jdbc:sqlite::resource:DB/course_data.db");
     private static ArrayList<CourseData> courseDataList =new ArrayList<CourseData>();
 
+    /**
+     * helping method for all DB method , establish the Connection between DB and program
+     * @return
+     */
     public static boolean connectToDB() {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -26,6 +31,11 @@ public class DB {
         return true;
     }
 
+    /**
+     * helping method for all DB method , cancel the Statement and Connection between DB and program
+     * @param stmt
+     * @return
+     */
     public static boolean closeConnection(Statement stmt){
         boolean flag = false;
         try {
@@ -49,8 +59,17 @@ public class DB {
         return flag;
     }
 
+    /**
+     * Multiple conditions searching implement by generating the SQL command according to different input.
+     * @param searchWord the keyword for search, if it is null, dump all course
+     * @param semester the semester now searching at
+     * @param type is the course 選修 必修 必帶
+     * @return all course fit the conditions
+     */
     public static ArrayList<CourseData> getCourse(String searchWord,String semester,int type){
         connectToDB();
+
+        //generate command
         String sql = "SELECT * FROM \'" + semester+"\'";
         Statement stmt = null;
         boolean firstConstraint = true;
@@ -74,6 +93,8 @@ public class DB {
             }
             sql += "isMust = \'" + (type-1) + "\'";
         }
+
+        //create statement and call helping method to handle data
         try{
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -88,6 +109,11 @@ public class DB {
         return courseDataList;
     }
 
+    /**
+     * helping method of getCourse(), extract data and put in to the static Arraylist .
+     * @param rs ResultSet given from database
+     * @throws SQLException
+     */
     private static void extractData(ResultSet rs) throws SQLException {
         courseDataList.clear();
         while (rs.next()){
