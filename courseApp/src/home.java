@@ -164,6 +164,7 @@ public class home {
                     courseStats = Processor.mappingToTableArray(choosedCourse);
                     refreshTable(courseStats);
                     search();
+                    selected.setVisible(false);
                 }
                 else{
                     semesterSelect.setSelectedIndex(currentSemesterIndex);
@@ -179,7 +180,7 @@ public class home {
         else{
             searchCourse=searchField.getText();
         }
-        System.out.println("Search for:" + searchCourse);
+        Debugger.showDebugMessage("Search for:" + searchCourse);
         ArrayList<CourseData> CD = DB.getCourse(searchCourse,semesterSelect.getSelectedItem().toString(),isMustSelect.getSelectedIndex());
         if(CD.size() == 0){
             layout.show(resultHolder,"n");
@@ -195,7 +196,7 @@ public class home {
     }
 
     public static void main(String[] args) {
-        Debugger.setDebugMode(true);
+        Debugger.setDebugMode(false);
         try {
             UIManager.setLookAndFeel(home.metalUI); // 使用Metal UI 模式啟動
             UIManager.setLookAndFeel(metalUI); // 使用Metal UI 模式啟動
@@ -337,7 +338,7 @@ public class home {
                                     break;
                                 }
                             }
-                            System.out.println(choosedCourse);
+                            Debugger.showDebugMessage("Choosed course: "+choosedCourse);
                             if(isExist){
                                 choosedCourse.remove(target);
                             }
@@ -349,7 +350,7 @@ public class home {
                                     JOptionPane.showMessageDialog(null,"新增課程與已選課程衝堂! \n 最多只允許衝堂兩堂","無法新增課程",JOptionPane.WARNING_MESSAGE);
                                 }
                             }
-                            System.out.println(choosedCourse);
+                            Debugger.showDebugMessage("Choosed course: "+choosedCourse);
                             courseStats = Processor.mappingToTableArray(choosedCourse);
                             refreshTable(courseStats);
                             refreshDetailPanel();
