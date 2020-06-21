@@ -3,6 +3,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 public class home {
@@ -47,10 +49,11 @@ public class home {
         super();
         searchCourse = search;
     }
+    public int currentSemesterIndex = semesterSelect.getSelectedIndex();
     public home() {
         initDetailElement();
         selected.setVisible(false);
-        searchResult = resultList.createPanel(DB.getCourse(null,"108-2"));
+        searchResult = resultList.createPanel(DB.getCourse(null, semesterSelect.getSelectedItem().toString()));
         tableDisplay = new courseTable().getPanel();
         selected.setBorder(new LineBorder(Color.GRAY, 3));
         resultHolder.add(searchResult,"r");
@@ -146,6 +149,23 @@ public class home {
                     else{
                         search();
                     }
+                }
+            }
+        });
+
+        semesterSelect.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Debugger.showDebugMessage("Attempt to change semester to : "+semesterSelect.getSelectedItem());
+                int check = JOptionPane.showConfirmDialog(null,"變更搜尋學期將會清空目前的課表，確認繼續進行嗎? ","變更學期確認",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+                if(check == 0){
+                    currentSemesterIndex = semesterSelect.getSelectedIndex();
+                    choosedCourse.clear();
+                    courseStats = Processor.mappingToTableArray(choosedCourse);
+                    refreshTable(courseStats);
+                }
+                else{
+                    semesterSelect.setSelectedIndex(currentSemesterIndex);
                 }
             }
         });
@@ -298,18 +318,15 @@ public class home {
                     if (mouseEvent.getClickCount() == 2) {
                         int index = theList.locationToIndex(mouseEvent.getPoint());
                         if (index >= 0) {
-                            System.out.println(displayData.size());
                             Object o = theList.getModel().getElementAt(index);
                             Debugger.showDebugMessage("Double-clicked on: " + o);
-                            System.out.println(choosedCourse);
+
                             for (int i = 0; i < displayData.size(); i++) {
                                 if (displayData.get(i).getRandom_num().equals(o.toString())) {
-                                    System.out.println("xxxxxx");
                                     detailData = displayData.get(i);
                                     break;
                                 }
                             }
-                            System.out.println(detailData.random_num);
                             boolean isExist = false;
                             CourseData target = null;
                             for(CourseData item:choosedCourse){
@@ -321,7 +338,6 @@ public class home {
                             }
                             System.out.println(choosedCourse);
                             if(isExist){
-                                System.out.println(target.random_num);
                                 choosedCourse.remove(target);
                             }
                             else{
