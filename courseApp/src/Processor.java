@@ -1,4 +1,4 @@
-﻿import java.awt.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -56,7 +56,7 @@ public class Processor {
 
     /**
      * While displaying to the user, the int parsed by timeStringToInt must parse back to String in the origin form
-     * @param parsed time
+     * @param  time
      * @return original time string
      */
     public static String timeIntToString(ArrayList<Integer> time){
@@ -201,7 +201,7 @@ public class Processor {
         switch (index){
             case 0:
                 result = new Color(255,i1,i2);
-            //    Debugger.showDebugMessage(result.toString());
+                //    Debugger.showDebugMessage(result.toString());
                 break;
             case 1:
                 result = new Color(i1,255,i2);
