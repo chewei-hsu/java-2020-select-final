@@ -3,6 +3,7 @@ public class Debugger {
         public static void setDebugMode(boolean debugMode) {
             Debugger.debugMode = debugMode;
             if(debugMode){
+                // print a cool "debug mode" figlet in terminal when the debug mode is on.
                 System.out.println("    ____       __                __  ___          __   \n" +
                         "   / __ \\___  / /_  __  ______ _/  |/  /___  ____/ /__ \n" +
                         "  / / / / _ \\/ __ \\/ / / / __ `/ /|_/ / __ \\/ __  / _ \\\n" +
@@ -21,6 +22,8 @@ public class Debugger {
             return debugMode;
         }
 
+        // only print the msg when debug mode is on.
+        // used to replace the println method and makes it easier to manage the terminal output by a boolean switch.
         public static void showDebugMessage(String msg){
             if(debugMode)
                 System.out.println(msg);

@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
+// course content is for rendering every element in the course table.
 public class courseContent {
     private JPanel content = new JPanel();
     private JTextArea name1 = new JTextArea();
@@ -14,6 +15,7 @@ public class courseContent {
         courseName1 = "Default";
         name1.setText(courseName1);
     }
+    // one course in a time block constructor
     public courseContent(CourseData i){
         if(i.getCourse_name().length() > 6){
             courseName1 = i.getCourse_name().substring(0,5)+"..";
@@ -27,6 +29,7 @@ public class courseContent {
         content.add(name1);
         CD1 = i;
     }
+    // two course in a time block constructor
     public courseContent(CourseData i,CourseData j){
         if(i.getCourse_name().length() > 6){
             courseName1 = i.getCourse_name().substring(0,5)+"..";
@@ -34,7 +37,7 @@ public class courseContent {
         else {
             courseName1 = i.getCourse_name();
         }
-        if(i.getCourse_name().length() > 6){
+        if(j.getCourse_name().length() > 6){
             courseName2 = j.getCourse_name().substring(0,5)+"..";
         }
         else {
@@ -56,6 +59,8 @@ public class courseContent {
         content.add(name1);
         content.add(name2);
     }
+
+    // Pretty-ish the course time used in the toolText of each element.
     public boolean timeAnalyzer(CourseData courseData){
         String rawTimeString = Processor.timeIntToString(courseData.getTime());
 
@@ -71,6 +76,7 @@ public class courseContent {
         return false;
     }
 
+    // return the content panel.
     public JPanel getPanel(){
         name1.setFont(new Font("Taipei Sans TC Beta",Font.BOLD,16));
         name1.setBackground(Processor.colorGenerator(CD1.getRandom_num()));
@@ -81,13 +87,4 @@ public class courseContent {
         return content;
     }
 
-    public JPanel getPanel(boolean autoGenerateCourse){
-        name1.setFont(new Font("Taipei Sans TC Beta",Font.BOLD,16));
-        name1.setBackground(Color.MAGENTA);
-        name1.setMinimumSize(new Dimension(100,20));
-        name1.setPreferredSize(new Dimension(100,20));
-        name1.setMargin(new Insets(1,5,1,5));
-        name1.setEditable(false);
-        return content;
-    }
 }
