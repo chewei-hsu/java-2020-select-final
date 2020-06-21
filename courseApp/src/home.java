@@ -67,15 +67,33 @@ public class home {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if(searchField.getText().equals("debug -on")){
-                    Debugger.setDebugMode(true);
+                    searchField.setText("");
+                    if(Debugger.getDebugMode()){
+                        JOptionPane.showMessageDialog(null,"開發者模式已經是開啟狀態\n如需關閉請輸入 debug -off","開發者模式",JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
+                        int check = JOptionPane.showConfirmDialog(null,"您確定要進入開發者模式嗎?\n開發者模式可能讓程式穩定性下降或顯示敏感資訊，請小心使用。 ","開發者模式確認",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+                        if(check == 0){
+                            Debugger.setDebugMode(true);
+                            JOptionPane.showMessageDialog(null,"已開啟開發者模式","開發者模式",JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
                 }
                 else if(searchField.getText().equals("debug -off")){
-                    Debugger.setDebugMode(false);
+                    searchField.setText("");
+                    if(!Debugger.getDebugMode()){
+                        JOptionPane.showMessageDialog(null,"開發者模式已經是關閉狀態\n如需開啟請輸入 debug -on","開發者模式",JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
+                        Debugger.setDebugMode(false);
+                        JOptionPane.showMessageDialog(null,"已關閉開發者模式","開發者模式",JOptionPane.INFORMATION_MESSAGE);
+                    }
+
                 }
                 else{
+                    // if field text is not debug command, then search.
                     search();
                 }
-
             }
         });
         btnLucky.addActionListener(new ActionListener() {
@@ -110,7 +128,7 @@ public class home {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                if (searchField.getText().equals("")) {
+                if (searchField.getText().equals("") || searchField.getText().contains("debug") ) {
                     searchField.setText("輸入關鍵字 或 直接搜尋");
                     searchTemp = "";
                     searchField.setForeground(new Color(175, 175, 175));
@@ -128,6 +146,7 @@ public class home {
                 if(keyCode == 10){  //Enter button
                     // handle debug mode switch.
                     if(searchField.getText().equals("debug -on")){
+                        searchField.setText("");
                         if(Debugger.getDebugMode()){
                             JOptionPane.showMessageDialog(null,"開發者模式已經是開啟狀態\n如需關閉請輸入 debug -off","開發者模式",JOptionPane.ERROR_MESSAGE);
                         }
@@ -138,9 +157,9 @@ public class home {
                                 JOptionPane.showMessageDialog(null,"已開啟開發者模式","開發者模式",JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
-
                     }
                     else if(searchField.getText().equals("debug -off")){
+                        searchField.setText("");
                         if(!Debugger.getDebugMode()){
                             JOptionPane.showMessageDialog(null,"開發者模式已經是關閉狀態\n如需開啟請輸入 debug -on","開發者模式",JOptionPane.ERROR_MESSAGE);
                         }
@@ -154,6 +173,7 @@ public class home {
                         // if field text is not debug command, then search.
                         search();
                     }
+                    searchField.setText("");
                 }
             }
         });

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class DB {
     private static Connection connection = null;
-    private static String url = FilenameUtils.separatorsToSystem( "jdbc:sqlite::resource:DB/course_data.db");
+    private static String url = "jdbc:sqlite::resource:DB/course_data.db";
     private static ArrayList<CourseData> courseDataList =new ArrayList<CourseData>();
 
     /**

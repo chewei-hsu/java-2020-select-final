@@ -183,7 +183,7 @@ public class Processor {
             return Integer.toString(i);
         }
         else{
-            return Character.toString(i+54);
+            return Character.toString((char) (i+54));
         }
     }
 
@@ -227,7 +227,7 @@ public class Processor {
         Collections.shuffle(cdal);
         for(int j = 0 ; j<cdal.size() ; j++){
             CourseData cd = cdal.get(j);
-            System.out.println("Checking for : "+cd.course_name);
+            Debugger.showDebugMessage("Checking for : "+cd.course_name);
             if(home.choosedCourse.contains(cd) || cd.time.isEmpty()){
                 cdal.remove(cd);
                 continue;
@@ -245,8 +245,8 @@ public class Processor {
             }
             home.choosedCourse.add(cd);
             home.courseStats = mappingToTableArray(home.choosedCourse);
-            System.out.println("Added : "+cd.course_name);
-            System.out.println(home.choosedCourse);
+            Debugger.showDebugMessage("Added : "+cd.course_name);
+            Debugger.showDebugMessage(home.choosedCourse.toString());
             cdal.remove(cd);
         }
     }
