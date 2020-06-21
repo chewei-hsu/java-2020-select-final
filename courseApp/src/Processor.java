@@ -223,16 +223,18 @@ public class Processor {
      * @throws NullPointerException
      */
     public static void autoChooseCourse(String semester) throws NullPointerException {
-        ArrayList<CourseData> cdal = new ArrayList<CourseData>(DB.getCourse(null,semester,0));
-        Collections.shuffle(cdal);
+        ArrayList<CourseData> cdal = new ArrayList<CourseData>(DB.getCourse(null,semester,0));  //using new() to avoid modification of DB.java static arraylist
+        Collections.shuffle(cdal);  //random the order of course data
         for(int j = 0 ; j<cdal.size() ; j++){
             CourseData cd = cdal.get(j);
             System.out.println("Checking for : "+cd.course_name);
+            //check if the class is alreay choosed and if it has a class time
             if(home.choosedCourse.contains(cd) || cd.time.isEmpty()){
                 cdal.remove(cd);
                 continue;
             }
             boolean conflict = false;
+            //check if all class time of the course is empty in current course table
             for(int courseTime : cd.time){
                 if(home.courseStats.get(courseTime).size() != 0){
                     conflict = true;
