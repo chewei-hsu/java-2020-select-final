@@ -166,7 +166,7 @@ public class home {
         else{
             resultHolder.remove(searchResult);
             searchResult = null;
-            searchResult = resultList.createPanel(CD);
+            searchResult = resultList.createPanel(new ArrayList<CourseData>(CD));
             resultHolder.add(searchResult,"r");
             layout = (CardLayout)resultHolder.getLayout();
             layout.show(resultHolder,"r");
@@ -298,15 +298,18 @@ public class home {
                     if (mouseEvent.getClickCount() == 2) {
                         int index = theList.locationToIndex(mouseEvent.getPoint());
                         if (index >= 0) {
+                            System.out.println(displayData.size());
                             Object o = theList.getModel().getElementAt(index);
                             Debugger.showDebugMessage("Double-clicked on: " + o);
+                            System.out.println(choosedCourse);
                             for (int i = 0; i < displayData.size(); i++) {
                                 if (displayData.get(i).getRandom_num().equals(o.toString())) {
+                                    System.out.println("xxxxxx");
                                     detailData = displayData.get(i);
                                     break;
                                 }
                             }
-                            ArrayList<ArrayList<CourseData>> oldCourseStats = Processor.mappingToTableArray(choosedCourse);
+                            System.out.println(detailData.random_num);
                             boolean isExist = false;
                             CourseData target = null;
                             for(CourseData item:choosedCourse){
@@ -316,11 +319,13 @@ public class home {
                                     break;
                                 }
                             }
+                            System.out.println(choosedCourse);
                             if(isExist){
+                                System.out.println(target.random_num);
                                 choosedCourse.remove(target);
                             }
                             else{
-                                if(Processor.courseAddCheck(oldCourseStats,detailData.getTime())){
+                                if(Processor.courseAddCheck(courseStats,detailData.getTime())){
                                     choosedCourse.add(detailData);
                                 }
                                 else {

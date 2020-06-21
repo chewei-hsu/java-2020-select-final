@@ -94,6 +94,9 @@ public class Processor {
 
     public static boolean courseAddCheck(ArrayList<ArrayList<CourseData>> stats,ArrayList<Integer> times){
         boolean isFull = false;
+        if(stats == null){
+            return true;
+        }
         for(Integer time:times){
             Debugger.showDebugMessage(stats.get(time).size()+"");
             if(stats.get(time).size()>=2){
@@ -172,12 +175,12 @@ public class Processor {
     }
 
     public static void autoChooseCourse(String semester) throws NullPointerException {
-        ArrayList<CourseData> cdal = DB.getCourse(null,semester);
+        ArrayList<CourseData> cdal = new ArrayList<CourseData>(DB.getCourse(null,semester));
         Collections.shuffle(cdal);
         for(int j = 0 ; j<cdal.size() ; j++){
             CourseData cd = cdal.get(j);
             System.out.println("Checking for : "+cd.course_name);
-            if(home.choosedCourse.contains(cd) || cd.time == null){
+            if(home.choosedCourse.contains(cd) || cd.time.isEmpty()){
                 cdal.remove(cd);
                 continue;
             }
@@ -188,13 +191,14 @@ public class Processor {
                     cdal.remove(cd);
                     break;
                 }
-                System.out.println(home.courseStats.get(courseTime).size());
             }
             if(conflict){
                 continue;
             }
             home.choosedCourse.add(cd);
             home.courseStats = mappingToTableArray(home.choosedCourse);
+            System.out.println("Added : "+cd.course_name);
+            System.out.println(home.choosedCourse);
             cdal.remove(cd);
         }
     }
