@@ -91,7 +91,7 @@ public class Processor {
 
     /**
      * To make the data structure tight, time is first store as a property of course
-     * but when rendering the course teble, the relationshi[ need to be inverse, course storage by class time index
+     * but when rendering the course table, the relationship need to be inverse, course storage by class time index
      * @param choosedCourse the classes going to be put on the course table
      * @return an arraylist of arraylist, each arraylist contain all classes taking place at that time
      */
@@ -132,7 +132,7 @@ public class Processor {
     /**
      * helping method of timeStringToInt()
      * @param ch
-     * @return
+     * @return integer day number
      */
     private static int parseDay(char ch){
         switch(ch){
@@ -154,7 +154,7 @@ public class Processor {
     /**
      * helping method of timeIntToString()
      * @param i
-     * @return
+     * @return char day number
      */
     private static char parseDay(int i){
         switch(i){
@@ -176,7 +176,7 @@ public class Processor {
     /**
      * helping method of timeIntToString(). parse 11~14 into A~D
      * @param i
-     * @return
+     * @return char time
      */
     private static String parseClassInt(int i){
         if(i<=10){
@@ -218,7 +218,7 @@ public class Processor {
 
     /**
      * The actual implementation of lucky button, given the course table and this method will try to fill the empty class time by random pick a course and check if it is suitable for that time.
-     * This method directly modify the course table and choosed course . Need to be careful .
+     * This method directly modify the course table and choose course . Need to be careful .
      * @param semester current semester
      * @throws NullPointerException
      */

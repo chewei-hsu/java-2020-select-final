@@ -11,7 +11,7 @@ public class DB {
 
     /**
      * helping method for all DB method , establish the Connection between DB and program
-     * @return
+     * @return true if success
      */
     public static boolean connectToDB() {
         try {
@@ -34,7 +34,7 @@ public class DB {
     /**
      * helping method for all DB method , cancel the Statement and Connection between DB and program
      * @param stmt
-     * @return
+     * @return true if success
      */
     public static boolean closeConnection(Statement stmt){
         boolean flag = false;
